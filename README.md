@@ -26,7 +26,7 @@ Each top-level directory is a GNU Stow package that symlinks into `$HOME`:
 ```text
 bash/   Bash overrides (.bashrc with Omarchy defaults sourced + personal additions)
 hypr/   Hyprland personal application keybindings (bindings.conf)
-nvim/   Neovim plugin additions (obsidian.nvim, render-markdown.nvim)
+nvim/   Neovim plugin additions (obsidian.nvim with custom slugs and keybindings, render-markdown.nvim)
 yazi/   Yazi file manager config (yazi.toml, no theme)
 ```
 

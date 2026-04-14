@@ -93,7 +93,7 @@ cd ~/projects/repos/dotfiles/dotfiles-omarchy
 stow -v -t ~ bash hypr nvim yazi
 ```
 
-Start a new terminal session for the shell config to take effect.
+Start a new terminal session, or run `source ~/.bashrc`, for the shell config to take effect.
 
 ### Unstow
 
@@ -156,20 +156,20 @@ After stowing:
 ## References
 
 - `README.md` - package layout, setup, and verification
+- `DEVIATIONS.md` - intentional deviations from Omarchy and boundary definitions
 - `AGENTS.md` - canonical repo-specific assistant context and maintainer checklist
 - `CLAUDE.md` - thin Claude Code wrapper importing `AGENTS.md`
 
 ## Related Repos
 
-Clone these locally if you plan to use `/synchronize` or compare personal customizations against upstream references. The `/synchronize` skill expects reference repos under `~/projects/repos/references/`.
+Clone these locally if you plan to use `/synchronize` or compare against upstream references. The `/synchronize` skill expects reference repos under `~/projects/repos/references/`.
 
 - `~/projects/repos/references/omarchy` - upstream Omarchy reference repo
 - `~/projects/repos/references/omarchy-pkgs` - upstream package reference repo
-- `~/projects/repos/dotfiles/dotfiles-arch` - shared headless baseline for deviation parity checks
 
 ## Credits
 
-Personal customizations on top of [Omarchy](https://github.com/basecamp/omarchy).
+Personal customizations on top of [Omarchy](https://github.com/basecamp/omarchy). See [DEVIATIONS.md](DEVIATIONS.md) for intentional differences and boundary definitions.
 
 ## License
 

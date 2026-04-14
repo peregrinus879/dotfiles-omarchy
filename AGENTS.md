@@ -1,6 +1,6 @@
 # AGENTS.md - dotfiles-omarchy
 
-Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/). Omarchy, official docs, and official package docs are the source of truth for default behavior.
+Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/). Omarchy, official docs, official package docs, and `DEVIATIONS.md` are the source of truth for default behavior and intentional differences.
 
 ## Scope
 
@@ -16,7 +16,7 @@ It owns:
 It does not own:
 
 - Omarchy-managed defaults, themes, or desktop configs
-- shared Linux baseline configs from `dotfiles-arch`
+- shared Linux baseline configs
 - Hyprland system bindings, window rules, or desktop defaults
 - Neovim options, shared plugins, or LazyVim configuration managed by `omarchy-nvim`
 
@@ -28,8 +28,9 @@ It does not own:
 
 ## Key Files
 
-- `README.md` - package layout, setup steps, and verification
-- `.claude/skills/synchronize/SKILL.md` - repo-specific sync workflow against Omarchy references
+- `README.md` - package layout, setup, and verification
+- `DEVIATIONS.md` - intentional deviations from Omarchy and boundary definitions
+- `.claude/skills/synchronize/SKILL.md` - repo-specific sync workflow against upstream references
 
 ## Setup Invariants
 
@@ -42,10 +43,8 @@ It does not own:
 
 ## Reference Sources
 
-- `/synchronize` expects local reference repos under the canonical `~/projects/repos/references/` root
-- `~/projects/repos/references/omarchy` - main repo for bash, tmux, and general Omarchy references
-- `~/projects/repos/references/omarchy-pkgs` - package builds, including the Omarchy Neovim package
-- `~/projects/repos/dotfiles/dotfiles-arch` - shared headless baseline for deviation parity checks
+- `DEVIATIONS.md` for upstream GitHub URLs and boundary definitions
+- `.claude/skills/synchronize/SKILL.md` for local reference repo paths and official docs
 
 ## Skills
 
@@ -55,15 +54,16 @@ It does not own:
 
 - Use `/synchronize` when syncing personal customizations against Omarchy references
 - Keep changes within the personal customization scope of this repo
-- Update `README.md` and `AGENTS.md` together when ownership, setup, or sync assumptions change
-- Keep shared Linux behavior in `dotfiles-arch`, not here
-- Keep Omarchy default behavior in Omarchy, not here
-- `obsidian.lua` must stay identical to `dotfiles-arch/nvim/.config/nvim/lua/plugins/obsidian.lua`; apply changes to both repos
+- Keep all intentional differences documented in `DEVIATIONS.md`
+- Update `README.md`, `AGENTS.md`, and `DEVIATIONS.md` together when ownership, setup, or sync assumptions change
+- Keep shared Linux behavior and Omarchy defaults out of this repo
+- `obsidian.lua` is maintained identically across dotfiles repos; apply changes to all copies
 
 ## Maintainer Checklist
 
-1. Review `omarchy` and `omarchy-pkgs` references for upstream changes to overridden items.
-2. Use `/synchronize` to compare personal customizations against upstream references.
-3. Update `README.md` when package ownership, setup steps, or verification steps change.
-4. Confirm the setup assumptions still hold: Omarchy installed, `omarchy-nvim` set up, Yazi installed.
-5. Start a fresh shell and Neovim session after structural changes to verify customizations still apply cleanly.
+1. Review the local reference repos and official docs for upstream changes to overridden items.
+2. Use `/synchronize` or compare manually against the upstream references.
+3. Confirm every intentional difference is still documented in `DEVIATIONS.md`.
+4. Update `README.md` when package ownership, setup steps, or verification steps change.
+5. Confirm the setup invariants still hold: Omarchy installed, `omarchy-nvim` set up, Yazi installed.
+6. Start a fresh shell and Neovim session after structural changes to verify everything still loads cleanly.

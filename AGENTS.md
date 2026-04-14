@@ -58,6 +58,7 @@ It does not own:
 - Update `README.md` and `AGENTS.md` together when ownership, setup, or sync assumptions change
 - Keep shared Linux behavior in `dotfiles-arch`, not here
 - Keep Omarchy default behavior in Omarchy, not here
+- `obsidian.lua` must stay identical to `dotfiles-arch/nvim/.config/nvim/lua/plugins/obsidian.lua`; apply changes to both repos
 
 ## Maintainer Checklist
 

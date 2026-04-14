@@ -9,7 +9,7 @@ Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles, managed with [
 Derivation model for this repo family:
 
 ```text
-dotfiles-ai                        cross-cutting AI harness configs
+AI harness configs              → dotfiles-ai
 Omarchy + personal deviations   → dotfiles-omarchy
 Omarchy + headless deviations   → dotfiles-arch
 dotfiles-arch + WSL overlay     → dotfiles-wsl

@@ -26,7 +26,7 @@ Each top-level directory is a GNU Stow package that symlinks into `$HOME`:
 ```text
 bash/   Bash overrides (.bashrc with Omarchy defaults sourced + personal additions)
 hypr/   Hyprland personal application keybindings (bindings.conf)
-nvim/   Neovim plugin additions (obsidian.nvim, render-markdown.nvim, neo-tree dotfiles)
+nvim/   Neovim plugin additions (obsidian.nvim, render-markdown.nvim)
 yazi/   Yazi file manager config (yazi.toml, no theme)
 ```
 
@@ -81,7 +81,6 @@ rm -f ~/.bashrc
 rm -f ~/.config/hypr/bindings.conf
 rm -f ~/.config/nvim/lua/plugins/obsidian.lua
 rm -f ~/.config/nvim/lua/plugins/render-markdown.lua
-rm -f ~/.config/nvim/lua/plugins/neo-tree.lua
 rm -f ~/.config/yazi/yazi.toml
 ```
 
@@ -138,8 +137,7 @@ If the old clone is no longer available, run the full cleanup in section 3 befor
 
 ```bash
 rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/nvim/lua/plugins/obsidian.lua \
-  ~/.config/nvim/lua/plugins/render-markdown.lua ~/.config/nvim/lua/plugins/neo-tree.lua \
-  ~/.config/yazi/yazi.toml
+  ~/.config/nvim/lua/plugins/render-markdown.lua ~/.config/yazi/yazi.toml
 cd ~/projects/repos/dotfiles/dotfiles-omarchy
 stow -R -v -t ~ bash hypr nvim yazi
 ```
@@ -153,7 +151,6 @@ After stowing:
 - Confirm `type tdl` shows the custom 50/50 split and passthrough guard.
 - Confirm `type y` shows the Yazi cd-on-exit function.
 - Run `nvim` and confirm `:Lazy` shows `obsidian.nvim` and `render-markdown.nvim` loaded.
-- Confirm Neo-tree shows dotfiles by default.
 - Run `yazi` and confirm the layout ratio and sort order match the config.
 
 ## References

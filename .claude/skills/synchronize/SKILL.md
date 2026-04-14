@@ -45,7 +45,6 @@ Reference repos live under `~/projects/repos/references/`:
 2. Compare `nvim/` plugin files against `omarchy-pkgs/` and `dotfiles-arch/nvim/`:
    - `obsidian.lua` against `dotfiles-arch/nvim/.config/nvim/lua/plugins/obsidian.lua`
    - `render-markdown.lua` against `dotfiles-arch/nvim/.config/nvim/lua/plugins/render-markdown.lua`
-   - `neo-tree.lua` against `dotfiles-arch/nvim/.config/nvim/lua/plugins/neo-tree.lua`
    - Verify no filename collisions with new `omarchy-nvim` plugin files
 3. Compare `hypr/bindings.conf` against `omarchy/config/hypr/bindings.conf`:
    - Omarchy default bindings at the top should match upstream

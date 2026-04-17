@@ -10,7 +10,6 @@ It owns:
 
 - personal Bash overrides in `bash/`
 - personal Hyprland application keybindings in `hypr/`
-- personal Neovim plugin additions in `nvim/`
 - Yazi file manager config in `yazi/`
 
 It does not own:
@@ -18,7 +17,7 @@ It does not own:
 - Omarchy-managed defaults, themes, or desktop configs
 - shared Linux baseline configs
 - Hyprland system bindings, window rules, or desktop defaults
-- Neovim options, shared plugins, or LazyVim configuration managed by `omarchy-nvim`
+- Neovim options, plugins, or LazyVim configuration (managed by `omarchy-nvim`)
 
 ## Environment
 
@@ -35,7 +34,6 @@ It does not own:
 ## Setup Invariants
 
 - Omarchy must be installed and functional before applying these dotfiles
-- `omarchy-nvim` must be set up first so `~/.config/nvim/lua/plugins/` exists as a real directory
 - Yazi must be installed separately (`sudo pacman -S yazi`)
 - Git identity is expected in the untracked local file `~/.config/git/config.local`
 - `hypr/bindings.conf` preserves Omarchy defaults at the top with personal bindings appended at the end for easy diffing against upstream updates
@@ -57,7 +55,6 @@ It does not own:
 - Keep all intentional differences documented in `DEVIATIONS.md`
 - Update `README.md`, `AGENTS.md`, and `DEVIATIONS.md` together when ownership, setup, or sync assumptions change
 - Keep shared Linux behavior and Omarchy defaults out of this repo
-- `obsidian.lua` is maintained identically across dotfiles repos; apply changes to all copies
 
 ## Maintainer Checklist
 
@@ -65,5 +62,5 @@ It does not own:
 2. Use `/synchronize` or compare manually against the upstream references.
 3. Confirm every intentional difference is still documented in `DEVIATIONS.md`.
 4. Update `README.md` when package ownership, setup steps, or verification steps change.
-5. Confirm the setup invariants still hold: Omarchy installed, `omarchy-nvim` set up, Yazi installed.
+5. Confirm the setup invariants still hold: Omarchy installed, Yazi installed.
 6. Start a fresh shell and Neovim session after structural changes to verify everything still loads cleanly.

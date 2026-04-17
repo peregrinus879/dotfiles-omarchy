@@ -14,17 +14,10 @@ Source configs from reference repos and official docs, compare against `dotfiles
 Reference repos live under `~/projects/repos/references/`:
 
 - `omarchy/` - main repo for bash, tmux, and general Omarchy defaults
-- `omarchy-pkgs/` - package builds, including the Omarchy Neovim package
-- `obsidian.nvim/` - obsidian.nvim plugin source
-
 ### Official Docs
 
 - [The Omarchy Manual](https://learn.omacom.io/2/the-omarchy-manual) - setup guides, keybindings, workflows
 - [GNU Stow Manual](https://www.gnu.org/software/stow/manual/stow.html) - symlink management and package structure
-- [LazyVim Docs](https://www.lazyvim.org/) - installation, extras, and plugin conventions
-- [Neovim Docs](https://neovim.io/doc/) - options, API, and Lua reference
-- [lazy.nvim Docs](https://lazy.folke.io/) - plugin manager configuration
-- [obsidian.nvim Docs](https://github.com/obsidian-nvim/obsidian.nvim/wiki) - plugin configuration and API
 - [Yazi Docs](https://yazi-rs.github.io/docs/) - configuration and themes
 
 ## When To Use
@@ -40,23 +33,19 @@ Reference repos live under `~/projects/repos/references/`:
    - `cx` alias against `omarchy/default/bash/aliases`
    - `tdl` function against `omarchy/default/bash/fns/tmux`
    - `y()` function is additive (Yazi is not in Omarchy)
-2. Compare `nvim/` plugin files against `omarchy-pkgs/` and upstream plugin defaults:
-   - `obsidian.lua` against upstream obsidian.nvim defaults and `DEVIATIONS.md`
-   - `render-markdown.lua` against upstream render-markdown.nvim defaults
-   - Verify no filename collisions with new `omarchy-nvim` plugin files
-3. Compare `hypr/bindings.conf` against `omarchy/config/hypr/bindings.conf`:
+2. Compare `hypr/bindings.conf` against `omarchy/config/hypr/bindings.conf`:
    - Omarchy default bindings at the top should match upstream
    - Personal bindings at the end are user customizations
-4. Compare `yazi/yazi.toml` against official Yazi docs
-5. For each difference, classify it:
+3. Compare `yazi/yazi.toml` against official Yazi docs
+4. For each difference, classify it:
    - **Intentional personal customization**: documented in `DEVIATIONS.md`, should stay different
    - **New upstream addition**: added upstream after the last sync, should be reviewed for inclusion
    - **Upstream change to existing config**: modified upstream, needs review
-6. Check `git log --format="%h %ad %s" --date=short -- <file>` on the relevant reference repo when you need to determine when a difference was introduced
-7. Cross-check differences against `DEVIATIONS.md`. If a difference is not documented there, treat it as a likely upstream change that needs review
-8. Apply new upstream additions and changes where they belong in the personal customizations
-9. Update `README.md`, `AGENTS.md`, and `DEVIATIONS.md` when package ownership, setup steps, or documented deviations change
-10. Summarize which changes were adopted, rejected, or intentionally kept different
+5. Check `git log --format="%h %ad %s" --date=short -- <file>` on the relevant reference repo when you need to determine when a difference was introduced
+6. Cross-check differences against `DEVIATIONS.md`. If a difference is not documented there, treat it as a likely upstream change that needs review
+7. Apply new upstream additions and changes where they belong in the personal customizations
+8. Update `README.md`, `AGENTS.md`, and `DEVIATIONS.md` when package ownership, setup steps, or documented deviations change
+9. Summarize which changes were adopted, rejected, or intentionally kept different
 
 ## Completion Checks
 
@@ -71,6 +60,5 @@ Reference repos live under `~/projects/repos/references/`:
 - Always check all relevant sources, not just one
 - Never assume a difference is intentional without verifying it is documented in `DEVIATIONS.md`
 - Do not copy Omarchy default behavior into this repo if Omarchy already manages it
-- Keep the Neovim additions additive: `omarchy-nvim` owns the base config, this repo only adds personal plugins
 - Keep the Bash overrides minimal: source Omarchy defaults, only override what needs to change
 - Keep Yazi config standalone since Yazi is not part of Omarchy

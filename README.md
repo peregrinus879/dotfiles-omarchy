@@ -62,13 +62,13 @@ sudo pacman -S yazi
 Recommended local layout for this repo family:
 
 ```text
-~/projects/repos/dotfiles/dotfiles-omarchy
+~/Projects/repos/dotfiles/dotfiles-omarchy
 ```
 
 Stow can work from any clone location, but the related docs and cross-repo maintenance workflows assume this layout.
 
 ```bash
-git clone https://github.com/peregrinus879/dotfiles-omarchy.git ~/projects/repos/dotfiles/dotfiles-omarchy
+git clone https://github.com/peregrinus879/dotfiles-omarchy.git ~/Projects/repos/dotfiles/dotfiles-omarchy
 ```
 
 ### 3. Prepare
@@ -92,7 +92,7 @@ rm -f ~/.config/yazi/yazi.toml
 Create symlinks for all packages:
 
 ```bash
-cd ~/projects/repos/dotfiles/dotfiles-omarchy
+cd ~/Projects/repos/dotfiles/dotfiles-omarchy
 stow -v -t ~ bash hypr yazi
 ```
 
@@ -101,7 +101,7 @@ Start a new terminal session, or run `source ~/.bashrc`, for the shell config to
 ### Unstow
 
 ```bash
-cd ~/projects/repos/dotfiles/dotfiles-omarchy
+cd ~/Projects/repos/dotfiles/dotfiles-omarchy
 stow -D -v -t ~ bash hypr yazi
 ```
 
@@ -110,7 +110,7 @@ stow -D -v -t ~ bash hypr yazi
 Preview what stow would do without making changes:
 
 ```bash
-cd ~/projects/repos/dotfiles/dotfiles-omarchy
+cd ~/Projects/repos/dotfiles/dotfiles-omarchy
 stow -v -n -t ~ bash hypr yazi
 ```
 
@@ -119,7 +119,7 @@ stow -v -n -t ~ bash hypr yazi
 To update symlinks after the repo content changes (same clone path):
 
 ```bash
-cd ~/projects/repos/dotfiles/dotfiles-omarchy
+cd ~/Projects/repos/dotfiles/dotfiles-omarchy
 stow -R -v -t ~ bash hypr yazi
 ```
 
@@ -128,7 +128,7 @@ To migrate from a different clone path, unstow from the old location first:
 ```bash
 cd /old/clone/path
 stow -D -v -t ~ bash hypr yazi
-cd ~/projects/repos/dotfiles/dotfiles-omarchy
+cd ~/Projects/repos/dotfiles/dotfiles-omarchy
 stow -v -t ~ bash hypr yazi
 ```
 
@@ -140,7 +140,7 @@ If the old clone is no longer available, run the full cleanup in section 3 befor
 
 ```bash
 rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/yazi/yazi.toml
-cd ~/projects/repos/dotfiles/dotfiles-omarchy
+cd ~/Projects/repos/dotfiles/dotfiles-omarchy
 stow -R -v -t ~ bash hypr yazi
 ```
 
@@ -163,9 +163,9 @@ After stowing:
 
 ## Related Repos
 
-Clone these locally if you plan to use `/synchronize` or compare against upstream references. The `/synchronize` skill expects reference repos under `~/projects/repos/references/`.
+Clone these locally if you plan to use `/synchronize` or compare against upstream references. The `/synchronize` skill expects reference repos under `~/Projects/repos/references/`.
 
-- `~/projects/repos/references/omarchy` - upstream Omarchy reference repo
+- `~/Projects/repos/references/omarchy` - upstream Omarchy reference repo
 
 ## Credits
 

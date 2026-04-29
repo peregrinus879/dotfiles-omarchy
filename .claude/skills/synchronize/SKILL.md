@@ -11,7 +11,7 @@ Source configs from reference repos and official docs, compare against `dotfiles
 
 ### Reference Repos
 
-Reference repos live under `~/projects/repos/references/`:
+Reference repos live under `~/Projects/repos/references/`:
 
 - `omarchy/` - main repo for bash, tmux, and general Omarchy defaults
 ### Official Docs

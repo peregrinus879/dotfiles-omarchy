@@ -2,7 +2,7 @@
 # The package list here is the single source of truth for the stow command sets.
 
 SHELL := /bin/bash
-PACKAGES := bash hypr yazi
+PACKAGES := bash hypr nvim yazi
 
 .PHONY: help stow unstow dry-run restow verify clean recover lint
 
@@ -55,6 +55,8 @@ verify:
 	@fail=0; \
 	for pair in "$$HOME/.bashrc=bash/.bashrc" \
 	  "$$HOME/.config/hypr/bindings.conf=hypr/.config/hypr/bindings.conf" \
+	  "$$HOME/.config/nvim/lua/plugins/obsidian.lua=nvim/.config/nvim/lua/plugins/obsidian.lua" \
+	  "$$HOME/.config/nvim/lua/plugins/render-markdown.lua=nvim/.config/nvim/lua/plugins/render-markdown.lua" \
 	  "$$HOME/.config/yazi/yazi.toml=yazi/.config/yazi/yazi.toml"; do \
 	  target="$${pair%%=*}"; src="$${pair##*=}"; \
 	  if [[ "$$(readlink -f "$$target")" == "$$(readlink -f "$$src")" ]]; then \
@@ -72,7 +74,8 @@ verify:
 	exit $$fail
 
 clean:
-	-rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/yazi/yazi.toml
+	-rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/yazi/yazi.toml \
+	  ~/.config/nvim/lua/plugins/obsidian.lua ~/.config/nvim/lua/plugins/render-markdown.lua
 
 recover: clean restow
 

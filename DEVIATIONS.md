@@ -16,7 +16,7 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 2. **Keep customizations minimal and targeted.** Only override what needs personal customization. Do not replicate Omarchy behavior.
 3. **Keep scope to personal desktop customizations.** Shared Linux baseline behavior and headless adaptations are out of scope.
 4. **No theme customizations.** Omarchy manages themes. This repo does not track theme files.
-5. **No Neovim plugins in this repo.** `omarchy-nvim` owns the base Neovim config.
+5. **Additive Neovim plugin specs only.** `omarchy-nvim` owns the base Neovim config; this repo adds vault-workflow plugin specs on top without touching base options.
 
 ## Reference Sources
 
@@ -39,6 +39,14 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 - Personal application bindings are appended after the defaults and commented-out examples.
 - Personal desktop app shortcut: `SUPER SHIFT, A` for AppImages launcher.
 - Personal web app shortcuts use `SUPER ALT` prefix (Claude, Gmail, GitHub, LinkedIn, ChatGPT, Teams, Proton, WhatsApp, X, YouTube, CFI, M365 Copilot).
+
+### Neovim
+
+- `omarchy-nvim` owns the base Neovim config. This repo adds two additive plugin specs for the vault workflow, adopted from the vault's former `nvim-vault` package.
+- `obsidian.lua` configures obsidian.nvim against the vault at `~/Projects/vault` (override with `OBSIDIAN_VAULT`), including the slug-rename, promote, and delete workflows that shell out to the vault's `normalize.py`.
+- `render-markdown.lua` adds visual markdown rendering; a companion, not required by obsidian.nvim.
+- Runtime dependencies beyond the base install: `ripgrep`, `python3`, and `wl-clipboard`, all present on Omarchy.
+- `theme.lua` in `~/.config/nvim/lua/plugins/` stays Omarchy-managed by the theme system and is not tracked here.
 
 ### Yazi
 

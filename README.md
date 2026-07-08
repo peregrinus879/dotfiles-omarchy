@@ -15,13 +15,14 @@ Omarchy + WSL deviations        → dotfiles-wsl
 ```
 
 - [`dotfiles-ai`](https://github.com/peregrinus879/dotfiles-ai) - AI harness configs: Claude Code and OpenCode settings, shared guidance, and commit workflow
-- [`dotfiles-omarchy`](https://github.com/peregrinus879/dotfiles-omarchy) - Personal Omarchy customizations: Bash overrides, Hyprland bindings, and Yazi
+- [`dotfiles-omarchy`](https://github.com/peregrinus879/dotfiles-omarchy) - Personal Omarchy customizations: Bash overrides, Hyprland bindings, Neovim plugins, and Yazi
 - [`dotfiles-wsl`](https://github.com/peregrinus879/dotfiles-wsl) - Self-contained WSL Arch dotfiles: terminal baseline plus Windows Terminal, clipboard integration, and OpenCode theme
 
 ## Stack
 
 - **Base**: [Omarchy](https://github.com/basecamp/omarchy)
 - **Bash**: Personal alias and function overrides on top of Omarchy defaults
+- **Editor**: [obsidian.nvim](https://github.com/obsidian-nvim/obsidian.nvim) and [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim) plugin specs on the `omarchy-nvim` base
 - **File Manager**: [Yazi](https://github.com/sxyazi/yazi) (not part of Omarchy)
 - **Desktop**: [Hyprland](https://github.com/hyprwm/Hyprland) personal application keybindings
 
@@ -32,6 +33,7 @@ Each top-level directory is a GNU Stow package that symlinks into `$HOME`:
 ```text
 bash/   Bash overrides (.bashrc with Omarchy defaults sourced + personal additions)
 hypr/   Hyprland personal application keybindings (bindings.conf)
+nvim/   Additive Neovim plugin specs for the vault workflow (obsidian.lua, render-markdown.lua)
 yazi/   Yazi file manager config (yazi.toml, no theme)
 ```
 
@@ -40,6 +42,7 @@ Key ownership rules:
 - Omarchy manages all defaults, themes, and desktop configs
 - `bash/` owns `~/.bashrc`, sources Omarchy defaults, and adds personal overrides below
 - `yazi/` is purely additive since Yazi is not part of Omarchy
+- `nvim/` is purely additive plugin specs on top of the `omarchy-nvim` base; the vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`)
 - `hypr/` owns `~/.config/hypr/bindings.conf` with Omarchy defaults preserved and personal application bindings appended at the end
 - no theme files are tracked; Omarchy manages themes
 
@@ -75,6 +78,7 @@ Checklist before stowing:
 
 - Omarchy is installed and functional
 - Yazi is installed
+- The vault is synced to `~/Projects/vault` (or `OBSIDIAN_VAULT` is set) if you use the Obsidian workflow
 - Any existing conflicting files were removed
 
 Remove existing files that would conflict with stow:
@@ -82,6 +86,8 @@ Remove existing files that would conflict with stow:
 ```bash
 rm -f ~/.bashrc
 rm -f ~/.config/hypr/bindings.conf
+rm -f ~/.config/nvim/lua/plugins/obsidian.lua
+rm -f ~/.config/nvim/lua/plugins/render-markdown.lua
 rm -f ~/.config/yazi/yazi.toml
 ```
 
@@ -91,7 +97,7 @@ Create symlinks for all packages:
 
 ```bash
 cd ~/Projects/repos/dotfiles/dotfiles-omarchy
-stow -v -t ~ bash hypr yazi
+stow -v -t ~ bash hypr nvim yazi
 ```
 
 Start a new terminal session, or run `source ~/.bashrc`, for the shell config to take effect.
@@ -100,7 +106,7 @@ Start a new terminal session, or run `source ~/.bashrc`, for the shell config to
 
 ```bash
 cd ~/Projects/repos/dotfiles/dotfiles-omarchy
-stow -D -v -t ~ bash hypr yazi
+stow -D -v -t ~ bash hypr nvim yazi
 ```
 
 ### Dry Run
@@ -109,7 +115,7 @@ Preview what stow would do without making changes:
 
 ```bash
 cd ~/Projects/repos/dotfiles/dotfiles-omarchy
-stow -v -n -t ~ bash hypr yazi
+stow -v -n -t ~ bash hypr nvim yazi
 ```
 
 ### Re-stow
@@ -118,16 +124,16 @@ To update symlinks after the repo content changes (same clone path):
 
 ```bash
 cd ~/Projects/repos/dotfiles/dotfiles-omarchy
-stow -R -v -t ~ bash hypr yazi
+stow -R -v -t ~ bash hypr nvim yazi
 ```
 
 To migrate from a different clone path, unstow from the old location first:
 
 ```bash
 cd /old/clone/path
-stow -D -v -t ~ bash hypr yazi
+stow -D -v -t ~ bash hypr nvim yazi
 cd ~/Projects/repos/dotfiles/dotfiles-omarchy
-stow -v -t ~ bash hypr yazi
+stow -v -t ~ bash hypr nvim yazi
 ```
 
 If the old clone is no longer available, run the full cleanup in section 3 before stowing.
@@ -137,9 +143,10 @@ If the old clone is no longer available, run the full cleanup in section 3 befor
 `omarchy-reinstall-configs` overwrites `~/.bashrc` and `~/.config/` from Omarchy defaults. After running it, re-stow:
 
 ```bash
-rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/yazi/yazi.toml
+rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/yazi/yazi.toml \
+  ~/.config/nvim/lua/plugins/obsidian.lua ~/.config/nvim/lua/plugins/render-markdown.lua
 cd ~/Projects/repos/dotfiles/dotfiles-omarchy
-stow -R -v -t ~ bash hypr yazi
+stow -R -v -t ~ bash hypr nvim yazi
 ```
 
 ## Verify
@@ -151,6 +158,7 @@ After stowing:
 - Confirm `type tdl` shows the custom 50/50 split and passthrough guard.
 - Confirm `type y` shows the Yazi cd-on-exit function.
 - Run `yazi` and confirm the layout ratio and sort order match the config.
+- Open a vault note in Neovim and confirm obsidian.nvim loads (`<leader>oo` opens the note switcher).
 
 ## Maintenance
 

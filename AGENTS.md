@@ -10,6 +10,7 @@ It owns:
 
 - personal Bash overrides in `bash/`
 - personal Hyprland application keybindings in `hypr/`
+- additive Neovim plugin specs for the vault workflow in `nvim/` (obsidian.nvim, render-markdown.nvim)
 - Yazi file manager config in `yazi/`
 
 It does not own:
@@ -17,7 +18,8 @@ It does not own:
 - Omarchy-managed defaults, themes, or desktop configs
 - shared Linux baseline configs
 - Hyprland system bindings, window rules, or desktop defaults
-- Neovim options, plugins, or LazyVim configuration (managed by `omarchy-nvim`)
+- base Neovim options and LazyVim configuration (managed by `omarchy-nvim`)
+- the vault itself, its scripts, or its sync (owned by the vault project)
 
 ## Environment
 
@@ -36,6 +38,7 @@ It does not own:
 
 - Omarchy must be installed and functional before applying these dotfiles
 - Yazi must be installed separately (`sudo pacman -S yazi`)
+- the vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`) for the obsidian.nvim workflow
 - Git identity is expected in the untracked local file `~/.config/git/config.local`
 - `hypr/bindings.conf` preserves Omarchy defaults at the top with personal bindings appended at the end for easy diffing against upstream updates
 - `omarchy-reinstall-configs` overwrites `~/.bashrc` and `~/.config/` from defaults; re-stow after running it
@@ -64,5 +67,5 @@ It does not own:
 3. Confirm every intentional difference is still documented in `DEVIATIONS.md`.
 4. Update `README.md` when package ownership, setup steps, or verification steps change.
 5. Confirm the setup invariants still hold: Omarchy installed, Yazi installed.
-6. Start a fresh shell after structural changes to verify everything still loads cleanly.
+6. Start a fresh shell and Neovim session after structural changes to verify everything still loads cleanly.
 7. Run `make verify` and `make lint` from the repo root after changing owned packages; use `make recover` after `omarchy-reinstall-configs`.

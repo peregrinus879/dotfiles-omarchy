@@ -6,6 +6,23 @@ PACKAGES := bash hypr yazi
 
 .PHONY: help stow unstow dry-run restow verify clean recover lint
 
+# Hyprland auto-reloads on config changes and caches an error if a reload
+# lands while a sourced file is mid-swap (as during a restow). Force a clean
+# reload after any stow operation that ends in a linked state, but only when
+# running inside a Hyprland session.
+define hypr_reload
+@if command -v hyprctl > /dev/null && [[ -n "$${HYPRLAND_INSTANCE_SIGNATURE:-}" ]]; then \
+  hyprctl reload > /dev/null; sleep 1; errs="$$(hyprctl configerrors)"; \
+  if [[ -z "$$errs" || "$$errs" == *"no errors"* ]]; then \
+    echo "ok:   hyprland reloaded, no config errors"; \
+  else \
+    echo "$$errs"; exit 1; \
+  fi; \
+else \
+  echo "note: hyprland session not detected, skipped hyprctl reload"; \
+fi
+endef
+
 help:
 	@echo "Targets:"
 	@echo "  stow      Stow all packages into ~"
@@ -19,6 +36,7 @@ help:
 
 stow:
 	stow -v -t ~ $(PACKAGES)
+	$(hypr_reload)
 
 unstow:
 	stow -D -v -t ~ $(PACKAGES)
@@ -28,6 +46,7 @@ dry-run:
 
 restow:
 	stow -R -v -t ~ $(PACKAGES)
+	$(hypr_reload)
 
 # Stow may tree-fold a parent directory (e.g. ~/.config/yazi) into a single
 # directory symlink, so per-file "test -L" checks false-negative. Compare
@@ -45,6 +64,11 @@ verify:
 	  fi; \
 	done; \
 	if bash -n bash/.bashrc; then echo "ok:   bash -n bash/.bashrc"; else echo "FAIL: bash -n bash/.bashrc"; fail=1; fi; \
+	if command -v hyprctl > /dev/null && [[ -n "$${HYPRLAND_INSTANCE_SIGNATURE:-}" ]]; then \
+	  errs="$$(hyprctl configerrors)"; \
+	  if [[ -z "$$errs" || "$$errs" == *"no errors"* ]]; then echo "ok:   no hyprland config errors"; \
+	  else echo "FAIL: $$errs"; fail=1; fi; \
+	fi; \
 	exit $$fail
 
 clean:

@@ -162,6 +162,8 @@ A repo-root `Makefile` keeps the package list in one place and wraps the routine
 - `make recover` - the Recovery steps after `omarchy-reinstall-configs` (clean + restow)
 - `make lint` - ShellCheck over the bash package; `.shellcheckrc` disables the pre-existing upstream-derived warnings so new issues stand out
 
+`make stow`, `make restow`, and `make recover` finish with a forced `hyprctl reload` plus a `hyprctl configerrors` check when run inside a Hyprland session. Hyprland's config watcher can reload mid-swap while stow is relinking `bindings.conf` and cache a stale sourcing error; the forced reload clears it and fails loudly on real errors. `make verify` includes the same error check read-only.
+
 ## References
 
 - `README.md` - package layout, setup, and verification

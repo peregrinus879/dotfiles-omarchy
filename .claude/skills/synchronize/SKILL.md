@@ -14,6 +14,7 @@ Source configs from reference repos and official docs, compare against `dotfiles
 Reference repos live under `~/Projects/repos/references/`:
 
 - `omarchy/` - main repo for bash, tmux, and general Omarchy defaults
+- `obsidian.nvim/` - obsidian.nvim upstream for the vault plugin spec
 
 ### Official Docs
 
@@ -37,7 +38,7 @@ Reference repos live under `~/Projects/repos/references/`:
 2. Compare `hypr/bindings.conf` against `omarchy/config/hypr/bindings.conf`:
    - Omarchy default bindings at the top should match upstream
    - Personal bindings at the end are user customizations
-3. Compare `yazi/yazi.toml` against official Yazi docs
+3. Compare `yazi/yazi.toml` against official Yazi docs, and the `nvim/` plugin specs against `obsidian.nvim/` and the render-markdown.nvim README
 4. For each difference, classify it:
    - **Intentional personal customization**: documented in `DEVIATIONS.md`, should stay different
    - **New upstream addition**: added upstream after the last sync, should be reviewed for inclusion

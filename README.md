@@ -185,6 +185,7 @@ A repo-root `Makefile` keeps the package list in one place and wraps the routine
 Clone these locally if you plan to use `/synchronize` or compare against upstream references. The `/synchronize` skill expects reference repos under `~/Projects/repos/references/`.
 
 - `~/Projects/repos/references/omarchy` - upstream Omarchy reference repo
+- `~/Projects/repos/references/obsidian.nvim` - obsidian.nvim reference repo for the vault plugin spec
 
 ## Credits
 

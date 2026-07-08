@@ -46,6 +46,7 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 - `obsidian.lua` configures obsidian.nvim against the vault at `~/Projects/vault` (override with `OBSIDIAN_VAULT`), including the slug-rename, promote, and delete workflows that shell out to the vault's `normalize.py`.
 - `render-markdown.lua` adds visual markdown rendering; a companion, not required by obsidian.nvim.
 - Runtime dependencies beyond the base install: `ripgrep`, `python3`, and `wl-clipboard`, all present on Omarchy.
+- The spec carries a WSL-guarded `open.func` override that routes URIs through Windows interop; it is inert on Omarchy, where the default `vim.ui.open` applies. Both repos track byte-identical copies of the spec.
 - `theme.lua` in `~/.config/nvim/lua/plugins/` stays Omarchy-managed by the theme system and is not tracked here.
 
 ### Yazi

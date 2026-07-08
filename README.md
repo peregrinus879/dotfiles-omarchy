@@ -146,15 +146,25 @@ stow -R -v -t ~ bash hypr yazi
 
 After stowing:
 
-- Confirm the core symlinks exist: `test -L ~/.bashrc && test -L ~/.config/hypr/bindings.conf && test -L ~/.config/yazi/yazi.toml`
+- Confirm the configs resolve into the repo clone: run `make verify` from the repo root. Stow may tree-fold `~/.config/yazi` into a directory symlink, so per-file `test -L` checks can false-negative.
 - Start a fresh shell and confirm `type cx` shows `claude` without a permission-bypass flag.
 - Confirm `type tdl` shows the custom 50/50 split and passthrough guard.
 - Confirm `type y` shows the Yazi cd-on-exit function.
 - Run `yazi` and confirm the layout ratio and sort order match the config.
 
+## Maintenance
+
+A repo-root `Makefile` keeps the package list in one place and wraps the routine commands. Run targets from the repo root on the Omarchy machine:
+
+- `make stow` / `make unstow` / `make dry-run` / `make restow` - the stow command sets from Setup
+- `make verify` - the Verify symlink checks plus bash syntax
+- `make clean` - the Prepare cleanup steps
+- `make recover` - the Recovery steps after `omarchy-reinstall-configs` (clean + restow)
+
 ## References
 
 - `README.md` - package layout, setup, and verification
+- `Makefile` - stow, verification, cleanup, and recovery automation
 - `DEVIATIONS.md` - intentional deviations from Omarchy and boundary definitions
 - `AGENTS.md` - canonical repo-specific assistant context and maintainer checklist
 - `CLAUDE.md` - thin Claude Code wrapper importing `AGENTS.md`

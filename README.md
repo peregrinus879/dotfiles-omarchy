@@ -81,9 +81,13 @@ Checklist before stowing:
 - The vault is synced to `~/Projects/vault` (or `OBSIDIAN_VAULT` is set) if you use the Obsidian workflow
 - Any existing conflicting files were removed
 
-Remove existing files that would conflict with stow:
+Remove existing files that would conflict with stow. The first loop removes tree-folded directory symlinks left by a previous stow; without it, the per-file removals would resolve through a folded symlink and delete tracked files from the repo:
 
 ```bash
+for d in ~/.config/nvim/lua/plugins ~/.config/nvim/lua ~/.config/nvim ~/.config/yazi; do
+  [[ -L "$d" ]] && rm -f "$d"
+done
+
 rm -f ~/.bashrc
 rm -f ~/.config/hypr/bindings.conf
 rm -f ~/.config/nvim/lua/plugins/obsidian.lua
@@ -143,6 +147,9 @@ If the old clone is no longer available, run the full cleanup in section 3 befor
 `omarchy-reinstall-configs` overwrites `~/.bashrc` and `~/.config/` from Omarchy defaults. After running it, re-stow:
 
 ```bash
+for d in ~/.config/nvim/lua/plugins ~/.config/nvim/lua ~/.config/nvim ~/.config/yazi; do
+  [[ -L "$d" ]] && rm -f "$d"
+done
 rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/yazi/yazi.toml \
   ~/.config/nvim/lua/plugins/obsidian.lua ~/.config/nvim/lua/plugins/render-markdown.lua
 cd ~/Projects/repos/dotfiles/dotfiles-omarchy

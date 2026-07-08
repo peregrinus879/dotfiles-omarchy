@@ -35,7 +35,9 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 
 ### Hyprland
 
-- `bindings.conf` preserves Omarchy default application bindings at the top for easy diffing against upstream.
+- `bindings.conf` preserves the Omarchy default bindings layout at the top, with the documented exceptions below, for easier diffing against upstream.
+- Upstream's ten default web-app bindings (ChatGPT, Grok, Calendar, Email, YouTube, WhatsApp, Google Messages, Google Photos, X, X Post; active upstream since Omarchy commit c6e55ca4) are intentionally kept commented out; the personal `SUPER ALT` web-app set below replaces them.
+- Upstream's trailing `# Logitech MX Keys` example block is intentionally omitted.
 - Personal application bindings are appended after the defaults and commented-out examples.
 - Personal desktop app shortcut: `SUPER SHIFT, A` for AppImages launcher.
 - Personal web app shortcuts use `SUPER ALT` prefix (Claude, Gmail, GitHub, LinkedIn, ChatGPT, Teams, Proton, WhatsApp, X, YouTube, CFI, M365 Copilot).

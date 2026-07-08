@@ -40,7 +40,7 @@ It does not own:
 - Yazi must be installed separately (`sudo pacman -S yazi`)
 - the vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`) for the obsidian.nvim workflow
 - Git identity is expected in the untracked local file `~/.config/git/config.local`
-- `hypr/bindings.conf` preserves Omarchy defaults at the top with personal bindings appended at the end for easy diffing against upstream updates
+- `hypr/bindings.conf` preserves the Omarchy defaults layout at the top (with deviations documented in `DEVIATIONS.md`) and appends personal bindings at the end
 - `omarchy-reinstall-configs` overwrites `~/.bashrc` and `~/.config/` from defaults; re-stow after running it
 
 ## Reference Sources

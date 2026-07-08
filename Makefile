@@ -73,7 +73,13 @@ verify:
 	fi; \
 	exit $$fail
 
+# Remove tree-folded directory symlinks first (deepest first); without this,
+# the per-file removals below would resolve THROUGH a folded symlink and
+# delete tracked files from the repo working tree.
 clean:
+	@for d in ~/.config/nvim/lua/plugins ~/.config/nvim/lua ~/.config/nvim ~/.config/yazi; do \
+	  if [[ -L "$$d" ]]; then rm -f "$$d"; fi; \
+	done
 	-rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/yazi/yazi.toml \
 	  ~/.config/nvim/lua/plugins/obsidian.lua ~/.config/nvim/lua/plugins/render-markdown.lua
 

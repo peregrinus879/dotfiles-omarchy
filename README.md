@@ -149,7 +149,7 @@ stow -R -v -t ~ bash hypr yazi
 After stowing:
 
 - Confirm the core symlinks exist: `test -L ~/.bashrc && test -L ~/.config/hypr/bindings.conf && test -L ~/.config/yazi/yazi.toml`
-- Start a fresh shell and confirm `type cx` shows `claude` without `--allow-dangerously-skip-permissions`.
+- Start a fresh shell and confirm `type cx` shows `claude` without a permission-bypass flag.
 - Confirm `type tdl` shows the custom 50/50 split and passthrough guard.
 - Confirm `type y` shows the Yazi cd-on-exit function.
 - Run `yazi` and confirm the layout ratio and sort order match the config.

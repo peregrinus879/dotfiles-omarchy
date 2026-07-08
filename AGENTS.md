@@ -63,4 +63,4 @@ It does not own:
 3. Confirm every intentional difference is still documented in `DEVIATIONS.md`.
 4. Update `README.md` when package ownership, setup steps, or verification steps change.
 5. Confirm the setup invariants still hold: Omarchy installed, Yazi installed.
-6. Start a fresh shell and Neovim session after structural changes to verify everything still loads cleanly.
+6. Start a fresh shell after structural changes to verify everything still loads cleanly.

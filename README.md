@@ -160,6 +160,7 @@ A repo-root `Makefile` keeps the package list in one place and wraps the routine
 - `make verify` - the Verify symlink checks plus bash syntax
 - `make clean` - the Prepare cleanup steps
 - `make recover` - the Recovery steps after `omarchy-reinstall-configs` (clean + restow)
+- `make lint` - ShellCheck over the bash package; `.shellcheckrc` disables the pre-existing upstream-derived warnings so new issues stand out
 
 ## References
 

@@ -65,4 +65,4 @@ It does not own:
 4. Update `README.md` when package ownership, setup steps, or verification steps change.
 5. Confirm the setup invariants still hold: Omarchy installed, Yazi installed.
 6. Start a fresh shell after structural changes to verify everything still loads cleanly.
-7. Run `make verify` from the repo root after changing owned packages; use `make recover` after `omarchy-reinstall-configs`.
+7. Run `make verify` and `make lint` from the repo root after changing owned packages; use `make recover` after `omarchy-reinstall-configs`.

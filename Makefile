@@ -4,7 +4,7 @@
 SHELL := /bin/bash
 PACKAGES := bash hypr yazi
 
-.PHONY: help stow unstow dry-run restow verify clean recover
+.PHONY: help stow unstow dry-run restow verify clean recover lint
 
 help:
 	@echo "Targets:"
@@ -15,6 +15,7 @@ help:
 	@echo "  verify    Check symlinks and bash syntax"
 	@echo "  clean     Remove files that would conflict with stow (README Prepare steps)"
 	@echo "  recover   Re-apply after omarchy-reinstall-configs (clean + restow)"
+	@echo "  lint      ShellCheck over the bash package (.shellcheckrc holds the disable list)"
 
 stow:
 	stow -v -t ~ $(PACKAGES)
@@ -50,3 +51,7 @@ clean:
 	-rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/yazi/yazi.toml
 
 recover: clean restow
+
+lint:
+	shellcheck -s bash bash/.bashrc
+	@echo "ok:   shellcheck clean"

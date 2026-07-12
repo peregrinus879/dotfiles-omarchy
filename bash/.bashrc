@@ -7,6 +7,9 @@ source ~/.local/share/omarchy/default/bash/rc
 
 # Personal overrides
 
+# Launch Claude Code with ultracode; interactive aliases (cx, tdl targets) inherit via alias rescan
+alias claude='claude --effort ultracode'
+
 # Run claude without --allow-dangerously-skip-permissions
 alias cx='printf "\033[2J\033[3J\033[H" && claude'
 

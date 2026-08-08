@@ -35,7 +35,7 @@ Reference repos live under `~/Projects/repos/references/`:
    - `cx` alias against `omarchy/default/bash/aliases`
    - `tdl` function against `omarchy/default/bash/fns/tmux`
    - `y()` function is additive (Yazi is not in Omarchy)
-2. Compare `hypr/bindings.conf` against the installed default `~/.local/share/omarchy/config/hypr/bindings.conf` (the reference repo migrated Hyprland configs to Lua, so `omarchy/config/hypr/` no longer carries a `.conf`):
+2. Compare `hypr/bindings.conf` against the installed default `~/.local/share/omarchy/config/hypr/bindings.conf` (the reference repo migrated Hyprland bindings to Lua, so `omarchy/config/hypr/` no longer carries `bindings.conf`):
    - Omarchy default bindings at the top should match the installed default, except the deviations documented in `DEVIATIONS.md`
    - Personal bindings at the end are user customizations
 3. Compare `yazi/yazi.toml` against official Yazi docs, and the `nvim/` plugin specs against `obsidian.nvim/` and the render-markdown.nvim README

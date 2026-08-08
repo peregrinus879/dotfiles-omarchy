@@ -36,7 +36,7 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 ### Hyprland
 
 - `bindings.conf` preserves the Omarchy default bindings layout at the top, with the documented exceptions below, for easier diffing against upstream.
-- Upstream's ten default web-app bindings (ChatGPT, Grok, Calendar, Email, YouTube, WhatsApp, Google Messages, Google Photos, X, X Post; active upstream since Omarchy commit c6e55ca4) are intentionally kept commented out; the personal `SUPER ALT` web-app set below replaces them.
+- Upstream's ten default web-app bindings (ChatGPT, Grok, Calendar, Email, YouTube, WhatsApp, Google Messages, Google Photos, X, X Post; active in the upstream default) are intentionally kept commented out; the personal `SUPER ALT` web-app set below replaces them.
 - Upstream's trailing `# Logitech MX Keys` example block is intentionally omitted.
 - Personal application bindings are appended after the defaults and commented-out examples.
 - Personal desktop app shortcut: `SUPER SHIFT, A` for AppImages launcher.
@@ -45,7 +45,7 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 ### Neovim
 
 - `omarchy-nvim` owns the base Neovim config. This repo adds two additive plugin specs for the vault workflow, adopted from the vault's former `nvim-vault` package.
-- `obsidian.lua` configures obsidian.nvim against the vault at `~/Projects/vault` (override with `OBSIDIAN_VAULT`), including the slug-rename, promote, and delete workflows that shell out to the vault's `normalize.py`.
+- `obsidian.lua` configures obsidian.nvim against the vault at `~/Projects/vault` (override with `OBSIDIAN_VAULT`), including slug-rename and promote workflows that shell out to the vault's `normalize.py`, plus confirm-prompted delete workflows.
 - `render-markdown.lua` adds visual markdown rendering; a companion, not required by obsidian.nvim.
 - Runtime dependencies beyond the base install: `ripgrep`, `python3`, and `wl-clipboard`, all present on Omarchy.
 - The spec carries a WSL-guarded `open.func` override that routes URIs through Windows interop; it is inert on Omarchy, where the default `vim.ui.open` applies. Both repos track byte-identical copies of the spec.

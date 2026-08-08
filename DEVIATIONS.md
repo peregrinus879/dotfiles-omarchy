@@ -27,6 +27,7 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 ### Bash
 
 - `.bashrc` sources Omarchy defaults from `~/.local/share/omarchy/default/bash/rc`, then adds personal overrides below.
+- `claude` is aliased to add `--effort ultracode`, so every interactive launch, including `cx` and `tdl`-launched AIs, inherits it via alias expansion; scripts and hooks stay plain. Ultracode is session-only upstream and cannot be set in `settings.json`.
 - `cx` alias drops Omarchy's permission-bypass flag (currently `--permission-mode bypassPermissions` upstream).
 - `y()` is added for Yazi cd-on-exit support. Yazi is not part of Omarchy.
 - `tdl` uses a 50/50 editor/AI split in the top 85% with a 15% bottom terminal pane, replacing Omarchy's 70/30 split.
@@ -64,4 +65,5 @@ The following do **not** belong in `dotfiles-omarchy`:
 - Shared Linux baseline configs (out of scope)
 - WSL or Windows-specific behavior (belong in `dotfiles-wsl`)
 - AI harness configs (belong in `dotfiles-ai`)
+- The vault itself, its scripts, or its sync (belong to the vault project)
 - Omarchy system bindings, window rules, or desktop defaults (belong in Omarchy)

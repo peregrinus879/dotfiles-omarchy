@@ -1,71 +1,39 @@
 # AGENTS.md - dotfiles-omarchy
 
-Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/). Omarchy, official docs, official package docs, and `DEVIATIONS.md` are the source of truth for default behavior and intentional differences.
+Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/): targeted personal deviations stowed on top of the Omarchy desktop (Bash overrides in `bash/`, Hyprland application keybindings in `hypr/`, additive Neovim vault-workflow plugin specs in `nvim/`, Yazi config in `yazi/`). Omarchy, official docs, official package docs, and `DEVIATIONS.md` are the source of truth for default behavior and intentional differences; ownership boundaries live in `DEVIATIONS.md` (Deviation Policy and Out Of Scope).
 
-## Scope
+## Load Map
 
-This repo carries standalone personal customizations for the Omarchy desktop. Omarchy manages its own defaults, themes, and desktop configs. This repo tracks only targeted personal deviations applied via GNU Stow.
+- Claude Code loads this file through the root `CLAUDE.md` `@AGENTS.md` import; skills load on invocation only.
+- The `Makefile` is the single source of the package list; `README.md` carries the human-facing setup, verification, and maintenance detail.
+- Repo-root `.claude/settings.json` and `opencode.json` are per-tool project allowlists for this repo's verification make targets (`verify`, `lint`).
 
-It owns:
+## Invariants
 
-- personal Bash overrides in `bash/`
-- personal Hyprland application keybindings in `hypr/`
-- additive Neovim plugin specs for the vault workflow in `nvim/` (obsidian.nvim, render-markdown.nvim)
-- Yazi file manager config in `yazi/`
+- Target machine: Omarchy; run stow and make targets only on the Omarchy host.
+- When editing sibling dotfiles repos, use identical wording for shared concepts; only repo-specific values (scope, package lists, invariants) differ.
+- The nvim vault plugin specs are byte-identical twins with `dotfiles-wsl`; `make verify` fails on drift.
+- Omarchy must be installed and functional before applying these dotfiles; Yazi is installed separately (`sudo pacman -S yazi`).
+- The vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`) for the obsidian.nvim workflow.
+- Git identity lives in the untracked per-host `~/.config/git/config.local`.
+- `hypr/bindings.conf` preserves the Omarchy defaults layout at the top (deviations documented in `DEVIATIONS.md`) and appends personal bindings at the end.
+- Keep every intentional difference documented in `DEVIATIONS.md`; update `README.md`, `AGENTS.md`, and `DEVIATIONS.md` together when ownership, setup, or sync assumptions change.
+- Known Limitations records repo decisions and behavior official docs do not state; doc-derivable facts (defaults, version gates, upstream status) are fetched at change time, not cached here.
 
-It does not own:
+## Post-Change Verification
 
-- Omarchy-managed defaults, themes, or desktop configs
-- shared Linux baseline configs
-- Hyprland system bindings, window rules, or desktop defaults
-- base Neovim options and LazyVim configuration (managed by `omarchy-nvim`)
-- the vault itself, its scripts, or its sync (owned by the vault project)
+- Run `make verify` and `make lint` from the repo root after changing owned packages.
+- Start a fresh shell and Neovim session after structural changes.
+- The full human checklist lives in `README.md` (Verify and Maintenance).
 
-## Environment
+## Known Limitations
 
-- OS: Omarchy (Arch Linux + Hyprland)
-- Terminal: Ghostty
-- Dev: Tmux, Neovim (LazyVim), Bash
+- `omarchy-reinstall-configs` overwrites `~/.bashrc` and `~/.config/` from defaults; after running it, run `make recover`.
 
-## Key Files
+## Deferred Items
 
-- `README.md` - package layout, setup, and verification
-- `Makefile` - stow, verification, cleanup, and recovery automation; single source of the package list
-- `DEVIATIONS.md` - intentional deviations from Omarchy and boundary definitions
-- `.claude/skills/synchronize/SKILL.md` - repo-specific sync workflow against upstream references
-
-## Setup Invariants
-
-- Omarchy must be installed and functional before applying these dotfiles
-- Yazi must be installed separately (`sudo pacman -S yazi`)
-- the vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`) for the obsidian.nvim workflow
-- Git identity is expected in the untracked local file `~/.config/git/config.local`
-- `hypr/bindings.conf` preserves the Omarchy defaults layout at the top (with deviations documented in `DEVIATIONS.md`) and appends personal bindings at the end
-- `omarchy-reinstall-configs` overwrites `~/.bashrc` and `~/.config/` from defaults; re-stow after running it
-
-## Reference Sources
-
-- `DEVIATIONS.md` for upstream GitHub URLs and boundary definitions
-- `.claude/skills/synchronize/SKILL.md` for local reference repo paths and official docs
+- watch basecamp/omarchy#5256 (upstream `tdl` DCS passthrough fix): when it merges, align the local `tdl` passthrough guard with upstream and update `DEVIATIONS.md`; the 50/50 split and second-AI-pane deviations stay regardless.
 
 ## Skills
 
-- `/synchronize` - sync personal customizations against Omarchy references
-
-## Workflow
-
-- Use `/synchronize` when syncing personal customizations against Omarchy references
-- Keep changes within the personal customization scope of this repo
-- Keep all intentional differences documented in `DEVIATIONS.md`
-- Update `README.md`, `AGENTS.md`, and `DEVIATIONS.md` together when ownership, setup, or sync assumptions change
-- Keep shared Linux behavior and Omarchy defaults out of this repo
-
-## Maintainer Checklist
-
-1. Review the local reference repos and official docs for upstream changes to overridden items.
-2. Use `/synchronize` or compare manually against the upstream references.
-3. Confirm every intentional difference is still documented in `DEVIATIONS.md`.
-4. Update `README.md` when package ownership, setup steps, or verification steps change.
-5. Confirm the setup invariants still hold: Omarchy installed, Yazi installed.
-6. Start a fresh shell and Neovim session after structural changes to verify everything still loads cleanly.
-7. Run `make verify` and `make lint` from the repo root after changing owned packages; use `make recover` after `omarchy-reinstall-configs`.
+- `/synchronize` - sync personal customizations against Omarchy references and official docs

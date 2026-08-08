@@ -18,6 +18,8 @@ Omarchy + WSL deviations        → dotfiles-wsl
 - [`dotfiles-omarchy`](https://github.com/peregrinus879/dotfiles-omarchy) - Personal Omarchy customizations: Bash overrides, Hyprland bindings, Neovim plugins, and Yazi
 - [`dotfiles-wsl`](https://github.com/peregrinus879/dotfiles-wsl) - Self-contained WSL Arch dotfiles: terminal baseline plus Windows Terminal, clipboard integration, and OpenCode theme
 
+Local clones live side by side under `~/Projects/repos/dotfiles/`.
+
 ## Stack
 
 - **Base**: [Omarchy](https://github.com/basecamp/omarchy)
@@ -45,7 +47,7 @@ Key ownership rules:
 - `nvim/` is purely additive plugin specs on top of the `omarchy-nvim` base; the vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`)
 - `hypr/` owns `~/.config/hypr/bindings.conf` with Omarchy defaults preserved and personal application bindings appended at the end
 - no theme files are tracked; Omarchy manages themes
-- repo-root `.claude/settings.json` and `opencode.json` are per-tool project allowlists for the repo's read-only make targets; they are not stowed
+- repo-root `.claude/settings.json` and `opencode.json` are per-tool project allowlists for this repo's verification make targets (`verify`, `lint`); they are not stowed
 
 ## Setup
 
@@ -145,23 +147,13 @@ If the old clone is no longer available, run the full cleanup in section 3 befor
 
 ### Recovery After `omarchy-reinstall-configs`
 
-`omarchy-reinstall-configs` overwrites `~/.bashrc` and `~/.config/` from Omarchy defaults. After running it, re-stow:
-
-```bash
-for d in ~/.config/nvim/lua/plugins ~/.config/nvim/lua ~/.config/nvim ~/.config/yazi; do
-  [[ -L "$d" ]] && rm -f "$d"
-done
-rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/yazi/yazi.toml \
-  ~/.config/nvim/lua/plugins/obsidian.lua ~/.config/nvim/lua/plugins/render-markdown.lua
-cd ~/Projects/repos/dotfiles/dotfiles-omarchy
-stow -R -v -t ~ bash hypr nvim yazi
-```
+`omarchy-reinstall-configs` overwrites `~/.bashrc` and `~/.config/` from Omarchy defaults. After running it, run `make recover` from the repo root (the Prepare cleanup plus a re-stow).
 
 ## Verify
 
-After stowing:
+After stowing or changing owned packages:
 
-- Confirm the configs resolve into the repo clone: run `make verify` from the repo root. Stow may tree-fold `~/.config/yazi` into a directory symlink, so per-file `test -L` checks can false-negative.
+- Run `make verify` and `make lint` from the repo root (`verify` compares resolved paths, so stow tree-folding does not false-negative).
 - Start a fresh shell and confirm `type cx` shows `claude` without a permission-bypass flag.
 - Confirm `type tdl` shows the custom 50/50 split and passthrough guard.
 - Confirm `type y` shows the Yazi cd-on-exit function.
@@ -178,15 +170,9 @@ A repo-root `Makefile` keeps the package list in one place and wraps the routine
 - `make recover` - the Recovery steps after `omarchy-reinstall-configs` (clean + restow)
 - `make lint` - ShellCheck over the bash package; `.shellcheckrc` disables the pre-existing upstream-derived warnings so new issues stand out
 
-`make stow`, `make restow`, and `make recover` finish with a forced `hyprctl reload` plus a `hyprctl configerrors` check when run inside a Hyprland session. Hyprland's config watcher can reload mid-swap while stow is relinking `bindings.conf` and cache a stale sourcing error; the forced reload clears it and fails loudly on real errors. `make verify` includes the same error check read-only.
+`make stow`, `make restow`, and `make recover` finish with a forced Hyprland reload and config-error check when run inside a Hyprland session (rationale in the Makefile header); `make verify` runs the same check read-only.
 
-## References
-
-- `README.md` - package layout, setup, and verification
-- `Makefile` - stow, verification, cleanup, and recovery automation
-- `DEVIATIONS.md` - intentional deviations from Omarchy and boundary definitions
-- `AGENTS.md` - canonical repo-specific assistant context and maintainer checklist
-- `CLAUDE.md` - thin Claude Code wrapper importing `AGENTS.md`
+Periodically, review the local reference repos and official docs for upstream changes to overridden items, sync with `/synchronize` or a manual comparison, and confirm every intentional difference is still documented in `DEVIATIONS.md`.
 
 ## Related Repos
 

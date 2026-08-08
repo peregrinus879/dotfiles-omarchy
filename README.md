@@ -173,7 +173,7 @@ After stowing:
 A repo-root `Makefile` keeps the package list in one place and wraps the routine commands. Run targets from the repo root on the Omarchy machine:
 
 - `make stow` / `make unstow` / `make dry-run` / `make restow` - the stow command sets from Setup
-- `make verify` - the Verify symlink checks plus bash syntax
+- `make verify` - the Verify symlink checks, bash syntax, and the nvim twin-spec sync check against `dotfiles-wsl`
 - `make clean` - the Prepare cleanup steps
 - `make recover` - the Recovery steps after `omarchy-reinstall-configs` (clean + restow)
 - `make lint` - ShellCheck over the bash package; `.shellcheckrc` disables the pre-existing upstream-derived warnings so new issues stand out

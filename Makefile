@@ -4,6 +4,11 @@
 SHELL := /bin/bash
 PACKAGES := bash hypr nvim yazi
 
+# The nvim vault plugin specs are byte-identical twins with dotfiles-wsl,
+# synced manually; verify fails on drift so the copies cannot silently diverge.
+SIBLING := $(HOME)/Projects/repos/dotfiles/dotfiles-wsl
+TWIN_SPECS := obsidian.lua render-markdown.lua
+
 .PHONY: help stow unstow dry-run restow verify clean recover lint
 
 # Hyprland auto-reloads on config changes and caches an error if a reload
@@ -29,7 +34,7 @@ help:
 	@echo "  unstow    Remove all package symlinks"
 	@echo "  dry-run   Preview stow actions without making changes"
 	@echo "  restow    Re-stow after repo content changes"
-	@echo "  verify    Check symlinks and bash syntax"
+	@echo "  verify    Check symlinks, bash syntax, and nvim twin-spec sync"
 	@echo "  clean     Remove files that would conflict with stow (README Prepare steps)"
 	@echo "  recover   Re-apply after omarchy-reinstall-configs (clean + restow)"
 	@echo "  lint      ShellCheck over the bash package (.shellcheckrc holds the disable list)"
@@ -71,6 +76,12 @@ verify:
 	  if [[ -z "$$errs" || "$$errs" == *"no errors"* ]]; then echo "ok:   no hyprland config errors"; \
 	  else echo "FAIL: $$errs"; fail=1; fi; \
 	fi; \
+	for f in $(TWIN_SPECS); do \
+	  ours="nvim/.config/nvim/lua/plugins/$$f"; twin="$(SIBLING)/nvim/.config/nvim/lua/plugins/$$f"; \
+	  if [[ ! -e "$$twin" ]]; then echo "note: dotfiles-wsl clone not found, skipped twin check for $$f"; \
+	  elif cmp -s "$$ours" "$$twin"; then echo "ok:   $$f matches the dotfiles-wsl twin"; \
+	  else echo "FAIL: $$f drifted from the dotfiles-wsl twin"; fail=1; fi; \
+	done; \
 	exit $$fail
 
 # Remove tree-folded directory symlinks first (deepest first); without this,

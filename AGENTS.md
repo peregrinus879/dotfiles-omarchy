@@ -29,10 +29,12 @@ Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles managed with [G
 ## Known Limitations
 
 - `omarchy-reinstall-configs` overwrites `~/.bashrc` and `~/.config/` from defaults; after running it, run `make recover`.
+- Stow tree-folds `~/.config/yazi` into a directory symlink pointing at the repo, so anything written there lands in the repo working tree; folding is the accepted repo-family stow convention (do not add `--no-folding`).
 
 ## Deferred Items
 
 - watch basecamp/omarchy#5256 (upstream `tdl` DCS passthrough fix): when it merges, align the local `tdl` passthrough guard with upstream and update `DEVIATIONS.md`; the 50/50 split and second-AI-pane deviations stay regardless.
+- watch the tree-folded `~/.config/yazi`: the first `ya pkg` install writes `plugins/` and `package.toml` into the repo working tree; decide then whether to track them (the `dotfiles-ai` opencode-deps pattern) or gitignore them (the `dotfiles-wsl` git-identity pattern).
 
 ## Skills
 

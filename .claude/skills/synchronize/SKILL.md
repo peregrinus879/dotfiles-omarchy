@@ -9,18 +9,12 @@ Source configs from reference repos and official docs, compare against `dotfiles
 
 ## Sources
 
-### Reference Repos
-
-Reference repos live under `~/Projects/repos/references/`:
+Local reference clones live under `~/Projects/repos/references/`:
 
 - `omarchy/` - main repo for bash, tmux, and general Omarchy defaults
 - `obsidian.nvim/` - obsidian.nvim upstream for the vault plugin spec
 
-### Official Docs
-
-- [The Omarchy Manual](https://learn.omacom.io/2/the-omarchy-manual) - setup guides, keybindings, workflows
-- [GNU Stow Manual](https://www.gnu.org/software/stow/manual/stow.html) - symlink management and package structure
-- [Yazi Docs](https://yazi-rs.github.io/docs/) - configuration and themes
+Upstream URLs, official docs, and descriptions live in `DEVIATIONS.md` (Reference Sources).
 
 ## When To Use
 

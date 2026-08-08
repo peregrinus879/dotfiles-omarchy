@@ -176,10 +176,7 @@ Periodically, review the local reference repos and official docs for upstream ch
 
 ## Related Repos
 
-Clone these locally if you plan to use `/synchronize` or compare against upstream references. The `/synchronize` skill expects reference repos under `~/Projects/repos/references/`.
-
-- `~/Projects/repos/references/omarchy` - upstream Omarchy reference repo
-- `~/Projects/repos/references/obsidian.nvim` - obsidian.nvim reference repo for the vault plugin spec
+Upstream comparison runs through the `/synchronize` skill, which carries the local reference clone paths. Upstream URLs and official docs live in [DEVIATIONS.md](DEVIATIONS.md) (Reference Sources).
 
 ## Credits
 

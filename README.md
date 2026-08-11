@@ -33,7 +33,7 @@ Local clones live side by side under `~/Projects/repos/dotfiles/`.
 Each top-level directory is a GNU Stow package that symlinks into `$HOME`:
 
 ```text
-bash/   Bash overrides (.bashrc with Omarchy defaults sourced + personal additions, trio workspace function)
+bash/   Bash overrides (.bashrc with Omarchy defaults sourced + personal additions, dw workspace function)
 hypr/   Hyprland personal application keybindings (bindings.conf)
 nvim/   Additive Neovim plugin specs for the vault workflow (obsidian.lua, render-markdown.lua)
 yazi/   Yazi file manager config (yazi.toml, no theme)
@@ -92,7 +92,7 @@ for d in ~/.config/bash/functions ~/.config/bash ~/.config/nvim/lua/plugins ~/.c
 done
 
 rm -f ~/.bashrc
-rm -f ~/.config/bash/functions/trio
+rm -f ~/.config/bash/functions/dw
 rm -f ~/.config/hypr/bindings.conf
 rm -f ~/.config/nvim/lua/plugins/obsidian.lua
 rm -f ~/.config/nvim/lua/plugins/render-markdown.lua
@@ -156,7 +156,7 @@ After stowing or changing owned packages:
 
 - Run `make verify` and `make lint` from the repo root (`verify` compares resolved paths, so stow tree-folding does not false-negative).
 - Start a fresh shell and confirm `type y` shows the Yazi cd-on-exit function.
-- Confirm `type trio` shows the workspace function; from a project directory, `trio` opens or resumes its session (`trio -c` continues both AIs' last conversations).
+- Confirm `type dw` shows the workspace function; from a project directory, `dw cc` or `dw oc` opens its session (`-c` continues that agent's last conversation; bare `dw` re-attaches an existing session).
 - Run `yazi` and confirm the layout ratio and sort order match the config.
 - Open a vault note in Neovim and confirm obsidian.nvim loads (`<leader>oo` opens the note switcher).
 

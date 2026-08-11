@@ -20,5 +20,5 @@ y() {
   rm -f -- "$tmp"
 }
 
-# Trio Dev Workspace (twin file with dotfiles-wsl)
-[[ -f ~/.config/bash/functions/trio ]] && source ~/.config/bash/functions/trio
+# Dev Workspace launcher (twin file with dotfiles-wsl)
+[[ -f ~/.config/bash/functions/dw ]] && source ~/.config/bash/functions/dw

@@ -10,7 +10,7 @@ PACKAGES := bash hypr nvim yazi
 SIBLING := $(HOME)/Projects/repos/dotfiles/dotfiles-wsl
 TWIN_SPECS := nvim/.config/nvim/lua/plugins/obsidian.lua \
   nvim/.config/nvim/lua/plugins/render-markdown.lua \
-  bash/.config/bash/functions/trio \
+  bash/.config/bash/functions/dw \
   yazi/.config/yazi/yazi.toml
 
 .PHONY: help stow unstow dry-run restow verify clean recover lint
@@ -63,7 +63,7 @@ restow:
 verify:
 	@fail=0; \
 	for pair in "$$HOME/.bashrc=bash/.bashrc" \
-	  "$$HOME/.config/bash/functions/trio=bash/.config/bash/functions/trio" \
+	  "$$HOME/.config/bash/functions/dw=bash/.config/bash/functions/dw" \
 	  "$$HOME/.config/hypr/bindings.conf=hypr/.config/hypr/bindings.conf" \
 	  "$$HOME/.config/nvim/lua/plugins/obsidian.lua=nvim/.config/nvim/lua/plugins/obsidian.lua" \
 	  "$$HOME/.config/nvim/lua/plugins/render-markdown.lua=nvim/.config/nvim/lua/plugins/render-markdown.lua" \
@@ -99,7 +99,7 @@ clean:
 	  if [[ -L "$$d" ]]; then rm -f "$$d"; fi; \
 	done
 	-rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/yazi/yazi.toml \
-	  ~/.config/bash/functions/trio \
+	  ~/.config/bash/functions/dw \
 	  ~/.config/nvim/lua/plugins/obsidian.lua ~/.config/nvim/lua/plugins/render-markdown.lua
 
 recover: clean restow

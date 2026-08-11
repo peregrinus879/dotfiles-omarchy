@@ -19,3 +19,6 @@ y() {
   fi
   rm -f -- "$tmp"
 }
+
+# Trio Dev Workspace (twin file with dotfiles-wsl)
+[[ -f ~/.config/bash/functions/trio ]] && source ~/.config/bash/functions/trio

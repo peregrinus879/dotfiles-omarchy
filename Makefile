@@ -9,7 +9,8 @@ PACKAGES := bash hypr nvim yazi
 # and identical in both repos.
 SIBLING := $(HOME)/Projects/repos/dotfiles/dotfiles-wsl
 TWIN_SPECS := nvim/.config/nvim/lua/plugins/obsidian.lua \
-  nvim/.config/nvim/lua/plugins/render-markdown.lua
+  nvim/.config/nvim/lua/plugins/render-markdown.lua \
+  bash/.config/bash/functions/trio
 
 .PHONY: help stow unstow dry-run restow verify clean recover lint
 
@@ -61,6 +62,7 @@ restow:
 verify:
 	@fail=0; \
 	for pair in "$$HOME/.bashrc=bash/.bashrc" \
+	  "$$HOME/.config/bash/functions/trio=bash/.config/bash/functions/trio" \
 	  "$$HOME/.config/hypr/bindings.conf=hypr/.config/hypr/bindings.conf" \
 	  "$$HOME/.config/nvim/lua/plugins/obsidian.lua=nvim/.config/nvim/lua/plugins/obsidian.lua" \
 	  "$$HOME/.config/nvim/lua/plugins/render-markdown.lua=nvim/.config/nvim/lua/plugins/render-markdown.lua" \
@@ -72,7 +74,9 @@ verify:
 	    echo "FAIL: $$target does not resolve into the repo"; fail=1; \
 	  fi; \
 	done; \
-	if bash -n bash/.bashrc; then echo "ok:   bash -n bash/.bashrc"; else echo "FAIL: bash -n bash/.bashrc"; fail=1; fi; \
+	for f in bash/.bashrc bash/.config/bash/functions/*; do \
+	  if bash -n "$$f"; then echo "ok:   bash -n $$f"; else echo "FAIL: bash -n $$f"; fail=1; fi; \
+	done; \
 	if command -v hyprctl > /dev/null && [[ -n "$${HYPRLAND_INSTANCE_SIGNATURE:-}" ]]; then \
 	  errs="$$(hyprctl configerrors)"; \
 	  if [[ -z "$$errs" || "$$errs" == *"no errors"* ]]; then echo "ok:   no hyprland config errors"; \
@@ -90,14 +94,15 @@ verify:
 # the per-file removals below would resolve THROUGH a folded symlink and
 # delete tracked files from the repo working tree.
 clean:
-	@for d in ~/.config/nvim/lua/plugins ~/.config/nvim/lua ~/.config/nvim ~/.config/yazi; do \
+	@for d in ~/.config/bash/functions ~/.config/bash ~/.config/nvim/lua/plugins ~/.config/nvim/lua ~/.config/nvim ~/.config/yazi; do \
 	  if [[ -L "$$d" ]]; then rm -f "$$d"; fi; \
 	done
 	-rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/yazi/yazi.toml \
+	  ~/.config/bash/functions/trio \
 	  ~/.config/nvim/lua/plugins/obsidian.lua ~/.config/nvim/lua/plugins/render-markdown.lua
 
 recover: clean restow
 
 lint:
-	shellcheck -s bash bash/.bashrc
+	shellcheck -s bash bash/.bashrc bash/.config/bash/functions/*
 	@echo "ok:   shellcheck clean"

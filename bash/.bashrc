@@ -10,12 +10,6 @@ source ~/.local/share/omarchy/default/bash/rc
 # Launch Claude Code with ultracode; interactive aliases (cx, tdl targets) inherit via alias expansion
 alias claude='claude --effort ultracode'
 
-# Run claude without Omarchy's permission-bypass flag
-alias cx='printf "\033[2J\033[3J\033[H" && claude'
-
-# Run codex without Omarchy's sandbox-off and no-approval flags
-alias cy='codex'
-
 # Yazi cd-on-exit (Yazi is not part of Omarchy)
 y() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"

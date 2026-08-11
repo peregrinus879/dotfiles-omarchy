@@ -154,8 +154,7 @@ If the old clone is no longer available, run the full cleanup in section 3 befor
 After stowing or changing owned packages:
 
 - Run `make verify` and `make lint` from the repo root (`verify` compares resolved paths, so stow tree-folding does not false-negative).
-- Start a fresh shell and confirm `type cx` shows `claude` and `type cy` shows `codex`, both without permission-bypass flags.
-- Confirm `type y` shows the Yazi cd-on-exit function.
+- Start a fresh shell and confirm `type y` shows the Yazi cd-on-exit function.
 - Run `yazi` and confirm the layout ratio and sort order match the config.
 - Open a vault note in Neovim and confirm obsidian.nvim loads (`<leader>oo` opens the note switcher).
 

@@ -33,8 +33,6 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 
 - `.bashrc` sources Omarchy defaults from `~/.local/share/omarchy/default/bash/rc`, then adds personal overrides below.
 - `claude` is aliased to add `--effort ultracode`, so every interactive launch, including `cx` and `tdl`-launched AIs, inherits it via alias expansion; scripts and hooks stay plain. Ultracode is session-only upstream and cannot be set in `settings.json`.
-- `cx` alias drops Omarchy's permission-bypass flag (currently `--permission-mode bypassPermissions` upstream).
-- `cy` alias drops Omarchy's Codex sandbox-off and no-approval flags (currently `-s danger-full-access -a never` upstream), so no agent launcher skips permissions.
 - `y()` is added for Yazi cd-on-exit support. Yazi is not part of Omarchy.
 
 ### Hyprland

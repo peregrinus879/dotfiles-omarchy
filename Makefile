@@ -4,10 +4,12 @@
 SHELL := /bin/bash
 PACKAGES := bash hypr nvim yazi
 
-# The nvim vault plugin specs are byte-identical twins with dotfiles-wsl,
-# synced manually; verify fails on drift so the copies cannot silently diverge.
+# Twin files are byte-identical with dotfiles-wsl, synced manually; verify
+# fails on drift so the copies cannot silently diverge. Paths are repo-relative
+# and identical in both repos.
 SIBLING := $(HOME)/Projects/repos/dotfiles/dotfiles-wsl
-TWIN_SPECS := obsidian.lua render-markdown.lua
+TWIN_SPECS := nvim/.config/nvim/lua/plugins/obsidian.lua \
+  nvim/.config/nvim/lua/plugins/render-markdown.lua
 
 .PHONY: help stow unstow dry-run restow verify clean recover lint
 
@@ -34,7 +36,7 @@ help:
 	@echo "  unstow    Remove all package symlinks"
 	@echo "  dry-run   Preview stow actions without making changes"
 	@echo "  restow    Re-stow after repo content changes"
-	@echo "  verify    Check symlinks, bash syntax, and nvim twin-spec sync"
+	@echo "  verify    Check symlinks, bash syntax, and twin-file sync"
 	@echo "  clean     Remove files that would conflict with stow (README Prepare steps)"
 	@echo "  recover   Re-apply after omarchy-reinstall-configs (clean + restow)"
 	@echo "  lint      ShellCheck over the bash package (.shellcheckrc holds the disable list)"
@@ -77,9 +79,9 @@ verify:
 	  else echo "FAIL: $$errs"; fail=1; fi; \
 	fi; \
 	for f in $(TWIN_SPECS); do \
-	  ours="nvim/.config/nvim/lua/plugins/$$f"; twin="$(SIBLING)/nvim/.config/nvim/lua/plugins/$$f"; \
+	  twin="$(SIBLING)/$$f"; \
 	  if [[ ! -e "$$twin" ]]; then echo "note: dotfiles-wsl clone not found, skipped twin check for $$f"; \
-	  elif cmp -s "$$ours" "$$twin"; then echo "ok:   $$f matches the dotfiles-wsl twin"; \
+	  elif cmp -s "$$f" "$$twin"; then echo "ok:   $$f matches the dotfiles-wsl twin"; \
 	  else echo "FAIL: $$f drifted from the dotfiles-wsl twin"; fail=1; fi; \
 	done; \
 	exit $$fail

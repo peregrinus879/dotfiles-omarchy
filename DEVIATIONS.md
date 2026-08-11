@@ -36,9 +36,6 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 - `cx` alias drops Omarchy's permission-bypass flag (currently `--permission-mode bypassPermissions` upstream).
 - `cy` alias drops Omarchy's Codex sandbox-off and no-approval flags (currently `-s danger-full-access -a never` upstream), so no agent launcher skips permissions.
 - `y()` is added for Yazi cd-on-exit support. Yazi is not part of Omarchy.
-- `tdl` uses a 50/50 editor/AI split in the top 85% with a 15% bottom terminal pane, replacing Omarchy's 70/30 split.
-- `tdl` guards AI panes with per-pane `allow-passthrough off` during initialization, restoring it after 1 second. This prevents DCS passthrough responses from being misrouted to the editor pane during the focus transition.
-- `tdl` supports an optional second AI pane.
 
 ### Hyprland
 

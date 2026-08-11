@@ -33,7 +33,7 @@ Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles managed with [G
 
 ## Deferred Items
 
-- watch basecamp/omarchy#5256 (upstream `tdl` DCS passthrough fix): when it merges, align the local `tdl` passthrough guard with upstream and update `DEVIATIONS.md`; the 50/50 split and second-AI-pane deviations stay regardless.
+- upstream `tdl` on the dev/quattro branches ends with `select-pane -t "$opencode_pane"` on an unset variable (focus regression introduced alongside `tds`); after the 4.0 update, verify the installed `tdl` before relying on it.
 - watch the tree-folded `~/.config/yazi`: the first `ya pkg` install writes `plugins/` and `package.toml` into the repo working tree; decide then whether to track them (the `dotfiles-ai` opencode-deps pattern) or gitignore them (the `dotfiles-wsl` git-identity pattern).
 
 ## Skills

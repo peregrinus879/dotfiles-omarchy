@@ -35,6 +35,7 @@ Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles managed with [G
 
 - Omarchy 4.0 quattro (unreleased, one-way upgrade): wait for the stable release, re-diff the quattro branch first, then follow the runbook in `~/Projects/scratch/2026-08-11-omarchy-quattro-upgrade-runbook.md`. Headlines: the upgrade rewrites `~/.bashrc` through the stow symlink (commit the upstream-authored diff), and the Lua cutover makes `hypr/bindings.conf` dead config (port personal bindings to `bindings.lua`, then rewrite the DEVIATIONS Hyprland section).
 - upstream `tdl` on the dev/quattro branches ends with `select-pane -t "$opencode_pane"` on an unset variable (focus regression introduced alongside `tds`); after the 4.0 update, verify the installed `tdl` before relying on it.
+- close or rework basecamp/omarchy#5256 (the `tdl` passthrough-guard PR from this account); the local guard was removed as ineffective on 2026-08-11.
 - watch the tree-folded `~/.config/yazi`: the first `ya pkg` install writes `plugins/` and `package.toml` into the repo working tree; decide then whether to track them (the `dotfiles-ai` opencode-deps pattern) or gitignore them (the `dotfiles-wsl` git-identity pattern).
 
 ## Skills

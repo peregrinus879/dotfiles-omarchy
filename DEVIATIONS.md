@@ -57,7 +57,7 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 ### Yazi
 
 - Added entirely. Yazi is not part of Omarchy.
-- `yazi.toml` carries local layout and behavior choices: ratio `[2, 4, 4]`, hidden files shown, directories sorted first, `sort_by = "natural"`, and `linemode = "size"`.
+- `yazi.toml` carries local layout and behavior choices: ratio `[2, 4, 4]`, hidden files shown, directories sorted first, `sort_by = "natural"`, and `linemode = "size"`. Tracked as a byte-identical twin with `dotfiles-wsl`.
 - No theme file is tracked. Omarchy manages themes.
 
 ## Out Of Scope

@@ -7,6 +7,10 @@ source ~/.local/share/omarchy/default/bash/rc
 
 # Personal overrides
 
+# Keep OpenCode on managed skills and expose its configured web-search tool
+export OPENCODE_DISABLE_EXTERNAL_SKILLS=1
+export OPENCODE_ENABLE_EXA=1
+
 # Launch Claude Code with ultracode; interactive aliases (cx, tdl targets) inherit via alias expansion
 alias claude='claude --effort ultracode'
 

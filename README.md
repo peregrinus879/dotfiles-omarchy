@@ -23,7 +23,7 @@ Local clones live side by side under `~/Projects/repos/dotfiles/`.
 ## Stack
 
 - **Base**: [Omarchy](https://github.com/basecamp/omarchy)
-- **Bash**: Personal alias and function overrides on top of Omarchy defaults
+- **Bash**: Personal alias, function, and OpenCode host-environment overrides on top of Omarchy defaults
 - **Editor**: [obsidian.nvim](https://github.com/obsidian-nvim/obsidian.nvim) and [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim) plugin specs on the `omarchy-nvim` base
 - **File Manager**: [Yazi](https://github.com/sxyazi/yazi) (not part of Omarchy)
 - **Desktop**: [Hyprland](https://github.com/hyprwm/Hyprland) personal application keybindings
@@ -42,7 +42,7 @@ yazi/   Yazi file manager config (yazi.toml, no theme)
 Key ownership rules:
 
 - Omarchy manages all defaults, themes, and desktop configs
-- `bash/` owns `~/.bashrc`, sources Omarchy defaults, and adds personal overrides below
+- `bash/` owns `~/.bashrc`, sources Omarchy defaults, and adds personal overrides below, including the interactive OpenCode skill-isolation and search environment; `dotfiles-ai` owns the OpenCode configuration itself
 - `yazi/` is purely additive since Yazi is not part of Omarchy
 - `nvim/` is purely additive plugin specs on top of the `omarchy-nvim` base; the vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`)
 - `hypr/` owns `~/.config/hypr/bindings.conf` with Omarchy defaults preserved and personal application bindings appended at the end
@@ -155,6 +155,7 @@ If the old clone is no longer available, run the full cleanup in section 3 befor
 After stowing or changing owned packages:
 
 - Run `make verify` and `make lint` from the repo root (`verify` compares resolved paths, so stow tree-folding does not false-negative).
+- Start a fresh shell and confirm `printenv OPENCODE_DISABLE_EXTERNAL_SKILLS` and `printenv OPENCODE_ENABLE_EXA` each print `1`; non-interactive OpenCode launchers must supply both variables themselves.
 - Start a fresh shell and confirm `type y` shows the Yazi cd-on-exit function.
 - Confirm `type dw` shows the workspace function; from a project directory, `dw cc` or `dw oc` opens its session (`-c` continues that agent's last conversation; bare `dw` re-attaches an existing session).
 - Run `yazi` and confirm the layout ratio and sort order match the config.

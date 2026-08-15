@@ -14,7 +14,7 @@ Local reference clones live under `~/Projects/repos/references/`:
 - `omarchy/` - main repo for bash, tmux, and general Omarchy defaults; tracks the upstream default branch, which upstream moves between releases (re-resolve with `git remote set-head origin -a`, then match the checkout), so pin release comparisons to the installed version's tag (`git show v4.0.0:<path>`)
 - `obsidian.nvim/` - obsidian.nvim upstream for the vault plugin spec
 
-The installed defaults the machine actually runs live under `/usr/share/omarchy` (package-backed since quattro). Upstream URLs, official docs, and descriptions live in `DEVIATIONS.md` (Reference Sources).
+The installed defaults the machine actually runs live under `/usr/share/omarchy` (package-backed since quattro). Upstream URLs, official docs, and descriptions live in `DEVIATIONS.md` (Reference Sources). Durable findings and deferred items live in `docs/maintenance.md`; sibling ledgers live at `~/Projects/repos/dotfiles/dotfiles-ai/docs/maintenance.md` and the `dotfiles-wsl` equivalent.
 
 ## When To Use
 
@@ -38,15 +38,16 @@ The installed defaults the machine actually runs live under `/usr/share/omarchy`
 5. App parity sweep: diff `pacman -Qe` against the installed default manifest (`/usr/share/omarchy/install/omarchy-base.packages` plus hardware conditionals) and the optional installers (`omarchy-install-*`); classify each extra as personal, optional-installed, or retired survivor, and account for provider resolution (`extra/neovim` satisfies the `nvim` entry)
 6. Tool-path integrity: every managed CLI in `~/.local/bin` (claude, codex, opencode, gemini, copilot, gh, and the rest) must be the Omarchy mise wrapper; `omarchy-refresh-applications` deletes and rewrites them, so verify with `head -3` on each and `mise ls`. Hand-installed scripts are unmanaged and survive. Old native install stores are removable only after confirming the running binary path via `/proc/<pid>/exe`
 7. Webapp entries: compare the webapp launchers in `~/.local/share/applications` against the current Omarchy default set and remove stale ones with `omarchy-webapp-remove`; personal bindings launch by URL and do not depend on desktop entries
-8. For each difference, classify it:
+8. Cross-repo coordination: read the sibling ledgers for items assigned to this repo and for stale entries describing this host's environment; after Omarchy migrations run, re-check the four agent-skills dirs (`~/.agents/skills`, `~/.claude/skills`, `~/.codex/skills`, `~/.pi/agent/skills`) and the `omarchy-crash-watch.service` state
+9. For each difference, classify it:
    - **Intentional personal customization**: documented in `DEVIATIONS.md`, should stay different
    - **New upstream addition**: added upstream after the last sync, should be reviewed for inclusion
    - **Upstream change to existing config**: modified upstream, needs review
-9. Check `git log --format="%h %ad %s" --date=short -- <file>` on the relevant reference repo when you need to determine when a difference was introduced
-10. Cross-check differences against `DEVIATIONS.md`. If a difference is not documented there, treat it as a likely upstream change that needs review
-11. Apply new upstream additions and changes where they belong in the personal customizations
-12. Update `README.md`, `AGENTS.md`, and `DEVIATIONS.md` when package ownership, setup steps, or documented deviations change
-13. Summarize which changes were adopted, rejected, or intentionally kept different
+10. Check `git log --format="%h %ad %s" --date=short -- <file>` on the relevant reference repo when you need to determine when a difference was introduced
+11. Cross-check differences against `DEVIATIONS.md`. If a difference is not documented there, treat it as a likely upstream change that needs review
+12. Apply new upstream additions and changes where they belong in the personal customizations
+13. Update `README.md`, `AGENTS.md`, and `DEVIATIONS.md` when package ownership, setup steps, or documented deviations change
+14. Summarize which changes were adopted, rejected, or intentionally kept different
 
 ## Completion Checks
 

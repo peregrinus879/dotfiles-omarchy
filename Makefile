@@ -60,7 +60,11 @@ restow:
 # Stow may tree-fold a parent directory (e.g. ~/.config/yazi) into a single
 # directory symlink, so per-file "test -L" checks false-negative. Compare
 # resolved paths instead: linked is linked, folded or not.
+# Fail closed: a missing verifier binary must fail the run, not skip a check.
 verify:
+	@for tool in readlink cmp luac; do \
+	  command -v "$$tool" > /dev/null || { echo "FAIL: required verifier '$$tool' is missing"; exit 1; }; \
+	done
 	@fail=0; \
 	for pair in "$$HOME/.bashrc=bash/.bashrc" \
 	  "$$HOME/.config/bash/functions/dw=bash/.config/bash/functions/dw" \
@@ -78,10 +82,8 @@ verify:
 	for f in bash/.bashrc bash/.config/bash/functions/*; do \
 	  if bash -n "$$f"; then echo "ok:   bash -n $$f"; else echo "FAIL: bash -n $$f"; fail=1; fi; \
 	done; \
-	if command -v luac > /dev/null; then \
-	  if luac -p hypr/.config/hypr/bindings.lua > /dev/null; then echo "ok:   luac -p hypr/.config/hypr/bindings.lua"; \
-	  else echo "FAIL: luac -p hypr/.config/hypr/bindings.lua"; fail=1; fi; \
-	else echo "note: luac not found, skipped bindings.lua syntax check"; fi; \
+	if luac -p hypr/.config/hypr/bindings.lua > /dev/null; then echo "ok:   luac -p hypr/.config/hypr/bindings.lua"; \
+	else echo "FAIL: luac -p hypr/.config/hypr/bindings.lua"; fail=1; fi; \
 	if command -v hyprctl > /dev/null && [[ -n "$${HYPRLAND_INSTANCE_SIGNATURE:-}" ]]; then \
 	  errs="$$(hyprctl configerrors)"; \
 	  if [[ -z "$$errs" || "$$errs" == *"no errors"* ]]; then echo "ok:   no hyprland config errors"; \

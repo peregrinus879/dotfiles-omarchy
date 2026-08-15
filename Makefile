@@ -65,6 +65,7 @@ verify:
 	for pair in "$$HOME/.bashrc=bash/.bashrc" \
 	  "$$HOME/.config/bash/functions/dw=bash/.config/bash/functions/dw" \
 	  "$$HOME/.config/hypr/bindings.conf=hypr/.config/hypr/bindings.conf" \
+	  "$$HOME/.config/hypr/bindings.lua=hypr/.config/hypr/bindings.lua" \
 	  "$$HOME/.config/nvim/lua/plugins/obsidian.lua=nvim/.config/nvim/lua/plugins/obsidian.lua" \
 	  "$$HOME/.config/nvim/lua/plugins/render-markdown.lua=nvim/.config/nvim/lua/plugins/render-markdown.lua" \
 	  "$$HOME/.config/yazi/yazi.toml=yazi/.config/yazi/yazi.toml"; do \
@@ -78,6 +79,10 @@ verify:
 	for f in bash/.bashrc bash/.config/bash/functions/*; do \
 	  if bash -n "$$f"; then echo "ok:   bash -n $$f"; else echo "FAIL: bash -n $$f"; fail=1; fi; \
 	done; \
+	if command -v luac > /dev/null; then \
+	  if luac -p hypr/.config/hypr/bindings.lua > /dev/null; then echo "ok:   luac -p hypr/.config/hypr/bindings.lua"; \
+	  else echo "FAIL: luac -p hypr/.config/hypr/bindings.lua"; fail=1; fi; \
+	else echo "note: luac not found, skipped bindings.lua syntax check"; fi; \
 	if command -v hyprctl > /dev/null && [[ -n "$${HYPRLAND_INSTANCE_SIGNATURE:-}" ]]; then \
 	  errs="$$(hyprctl configerrors)"; \
 	  if [[ -z "$$errs" || "$$errs" == *"no errors"* ]]; then echo "ok:   no hyprland config errors"; \
@@ -98,7 +103,8 @@ clean:
 	@for d in ~/.config/bash/functions ~/.config/bash ~/.config/nvim/lua/plugins ~/.config/nvim/lua ~/.config/nvim ~/.config/yazi; do \
 	  if [[ -L "$$d" ]]; then rm -f "$$d"; fi; \
 	done
-	-rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/yazi/yazi.toml \
+	-rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/hypr/bindings.lua \
+	  ~/.config/yazi/yazi.toml \
 	  ~/.config/bash/functions/dw \
 	  ~/.config/nvim/lua/plugins/obsidian.lua ~/.config/nvim/lua/plugins/render-markdown.lua
 

@@ -40,13 +40,13 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 
 ### Hyprland
 
-- **Quattro transition (in progress):** `bindings.conf` is the live config on Omarchy 3.8.4; `bindings.lua` is the quattro successor, personal overrides only, loaded after the Omarchy defaults and inert until the 4.0 Lua cutover. It carries the same personal set as below, expressed natively: `hl.unbind` retires the twelve default web-app bindings, the `SUPER ALT` web-app set and the AppImages binding are re-added via `o.bind`, Gmail takes `SUPER ALT G` from the group-tiling default, and the personal Tmux binding is dropped because quattro's default is functionally identical. The bindings.conf bullets below describe the 3.8.4 state and are rewritten at the cutover.
-- `bindings.conf` preserves the Omarchy default bindings layout at the top, with the documented exceptions below, for easier diffing against upstream.
-- Upstream's ten default web-app bindings (ChatGPT, Grok, Calendar, Email, YouTube, WhatsApp, Google Messages, Google Photos, X, X Post; active in the upstream default) are intentionally kept commented out; the personal `SUPER ALT` web-app set below replaces them.
-- Upstream's trailing `# Logitech MX Keys` example block is intentionally omitted.
-- Personal application bindings are appended after the defaults and commented-out examples.
-- Personal desktop app shortcut: `SUPER SHIFT, A` for AppImages launcher.
-- Personal web app shortcuts use `SUPER ALT` prefix (Claude, Gmail, GitHub, LinkedIn, ChatGPT, Teams, Proton, WhatsApp, X, YouTube, CFI, M365 Copilot).
+- `bindings.lua` is the only tracked Hyprland file: personal overrides, loaded after the Omarchy defaults through the Omarchy-owned `~/.config/hypr/hyprland.lua` require chain. No defaults are replicated.
+- The twelve default web-app bindings (ChatGPT, Grok, Calendar, Email, New email, YouTube, WhatsApp, Google Messages, Google Photos, Google Maps, X, X Post) are retired via `hl.unbind`; the personal `SUPER ALT` web-app set replaces them (Claude, Gmail, GitHub, LinkedIn, CFI, M365 Copilot, ChatGPT, Proton, Teams, WhatsApp, X, YouTube).
+- `SUPER SHIFT A` launches the AppImages manager, taking the key from the default ChatGPT web app.
+- `SUPER ALT G` launches Gmail, taking the key from the default "move window out of group" tiling binding; that default is knowingly sacrificed.
+- The pre-quattro personal Tmux binding is dropped: quattro's `SUPER ALT RETURN` default is functionally identical (tmux attach or new "Work" session in the terminal cwd).
+- The preinstalled app and TUI bindings (Music, Docker, Signal, Obsidian, Omawrite, Passwords, Herdr, Tmux) stay on Omarchy defaults.
+- All other Hyprland config (`hyprland.lua`, `monitors.lua`, `input.lua`, `looknfeel.lua`, `autostart.lua`) is Omarchy-owned and untracked; machine-local values (display scale, keyboard layouts, NVIDIA env, decoration) live there directly.
 
 ### Neovim
 

@@ -34,7 +34,7 @@ Each top-level directory is a GNU Stow package that symlinks into `$HOME`:
 
 ```text
 bash/   Bash overrides (.bashrc with Omarchy defaults sourced + personal additions, dw workspace function)
-hypr/   Hyprland personal application keybindings (bindings.conf, live on 3.8.4; bindings.lua, quattro successor)
+hypr/   Hyprland personal application keybindings (bindings.lua)
 nvim/   Additive Neovim plugin specs for the vault workflow (obsidian.lua, render-markdown.lua)
 yazi/   Yazi file manager config (yazi.toml, no theme)
 ```
@@ -45,7 +45,7 @@ Key ownership rules:
 - `bash/` owns `~/.bashrc`, sources Omarchy defaults, and adds personal overrides below, including the interactive OpenCode skill-isolation and search environment; `dotfiles-ai` owns the OpenCode configuration itself
 - `yazi/` is purely additive since Yazi is not part of Omarchy
 - `nvim/` is purely additive plugin specs on top of the `omarchy-nvim` base; the vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`)
-- `hypr/` owns `~/.config/hypr/bindings.conf` (live on 3.8.4, Omarchy defaults preserved with personal bindings appended) and `~/.config/hypr/bindings.lua` (quattro successor, personal overrides only, inert until the Lua cutover)
+- `hypr/` owns `~/.config/hypr/bindings.lua`: personal overrides only, loaded after the Omarchy defaults; all other Hyprland config is Omarchy-owned and untracked
 - no theme files are tracked; Omarchy manages themes
 - repo-root `.claude/settings.json` and `opencode.json` are per-tool project allowlists for this repo's verification make targets (`verify`, `lint`); they are not stowed
 
@@ -93,7 +93,7 @@ done
 
 rm -f ~/.bashrc
 rm -f ~/.config/bash/functions/dw
-rm -f ~/.config/hypr/bindings.conf
+rm -f ~/.config/hypr/bindings.lua
 rm -f ~/.config/nvim/lua/plugins/obsidian.lua
 rm -f ~/.config/nvim/lua/plugins/render-markdown.lua
 rm -f ~/.config/yazi/yazi.toml
@@ -146,9 +146,11 @@ stow -v -t ~ bash hypr nvim yazi
 
 If the old clone is no longer available, run the full cleanup in section 3 before stowing.
 
-### Recovery After `omarchy-reinstall-configs`
+### Recovery After Omarchy Config Resets
 
-`omarchy-reinstall-configs` overwrites `~/.bashrc` and `~/.config/` from Omarchy defaults. After running it, run `make recover` from the repo root (the Prepare cleanup plus a re-stow).
+`omarchy-reinstall-configs` overwrites `~/.bashrc` and `~/.config/` from Omarchy defaults (on quattro via `cp -af /etc/skel/. ~/`). After running it, `git restore` any repo files it clobbered through stow symlinks, then run `make recover` from the repo root (the Prepare cleanup plus a re-stow).
+
+`omarchy-refresh-hyprland` (and `omarchy-refresh-config` generally) copies shipped defaults over existing files with `cp -f`, which writes through a stow symlink into the repo working tree; the symlink itself survives and a timestamped `.bak` of the personal content is left beside it. After it runs, `git restore hypr/.config/hypr/bindings.lua` is the whole recovery.
 
 ## Verify
 

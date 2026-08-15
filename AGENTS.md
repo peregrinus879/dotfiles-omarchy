@@ -17,7 +17,7 @@ Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles managed with [G
 - The vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`) for the obsidian.nvim workflow.
 - Git identity lives in the untracked per-host `~/.config/git/config.local`.
 - Interactive Bash exports `OPENCODE_DISABLE_EXTERNAL_SKILLS=1` and `OPENCODE_ENABLE_EXA=1` so terminal-launched OpenCode uses its managed skills and exposes web search. `dotfiles-ai` owns OpenCode configuration; this repo owns the Omarchy host environment. Non-interactive launchers supply the same variables explicitly.
-- `hypr/bindings.conf` preserves the Omarchy defaults layout at the top (deviations documented in `DEVIATIONS.md`) and appends personal bindings at the end; `hypr/bindings.lua` carries the quattro successor (personal overrides only, loaded after the defaults), inert until the 4.0 Lua cutover.
+- `hypr/bindings.lua` carries personal Hyprland overrides only (the twelve default web-app bindings retired via `hl.unbind`, the personal `SUPER ALT` set and AppImages added), loaded after the Omarchy defaults; no defaults are replicated (deviations documented in `DEVIATIONS.md`).
 - Keep every intentional difference documented in `DEVIATIONS.md`; update `README.md`, `AGENTS.md`, and `DEVIATIONS.md` together when ownership, setup, or sync assumptions change.
 - Known Limitations records repo decisions and behavior official docs do not state; doc-derivable facts (defaults, version gates, upstream status) are fetched at change time, not cached here.
 
@@ -30,11 +30,12 @@ Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles managed with [G
 ## Known Limitations
 
 - `omarchy-reinstall-configs` and `omarchy-refresh-config` copy defaults with no symlink awareness, writing through stow symlinks into this repo's files; if either runs, `git restore` the clobbered repo files first, then run `make recover`. The quattro version (`cp -af /etc/skel/. ~/`) behaves the same way.
+- `omarchy-refresh-hyprland` refreshes every `~/.config/hypr` Lua file including the stowed `bindings.lua`; the `cp -f` writes the shipped default through the symlink into the repo working tree (the link survives, a timestamped `.bak` of the personal content is left beside it). Recovery is `git restore hypr/.config/hypr/bindings.lua`. Verified against the installed 4.0.0 scripts on 2026-08-15.
 - Stow tree-folds `~/.config/yazi` into a directory symlink pointing at the repo, so anything written there lands in the repo working tree; folding is the accepted repo-family stow convention (do not add `--no-folding`).
 
 ## Deferred Items
 
-- Omarchy 4.0 quattro upgrade (released 2026-08-14, one-way): run imminently via Update > Omarchy (to 3.8.5), then Update > Omarchy To Quattro. Gates before rebooting: both repos clean and pushed, `sudo snapper list` shows working snapshots, and `sudo limine-snapper-list` shows the script's pre-upgrade snapshot number. Post-upgrade sequence, in order: `make recover` first (`make verify` is red until the upgrade-replaced `bindings.lua` symlink is restored), commit the upstream-authored `~/.bashrc` diff (written through the stow symlink) together with the DEVIATIONS Bash source-path bullet it invalidates, then retire `bindings.conf` with the full README/AGENTS/DEVIATIONS Hyprland rewrite. The 2026-08-11 scratch runbook is superseded by the sparred plan except its WSL follow-up section.
+- resync `dotfiles-wsl` to the Omarchy 4.0 baseline via `/synchronize` on the WSL host (the quattro upgrade completed here 2026-08-15); the verified 3.8.4-to-quattro drift list lives in the WSL section of `~/Projects/scratch/2026-08-11-omarchy-quattro-upgrade-runbook.md`.
 - upstream `tdl` still ends with `select-pane -t "$opencode_pane"` on a variable it never sets, verified at v4.0.0 `default/bash/fns/tmux` on 2026-08-15 (cosmetic focus regression; `post-4.0-fixes` does not touch it).
 - close or rework basecamp/omarchy#5256 (the `tdl` passthrough-guard PR from this account); the local guard was removed as ineffective on 2026-08-11.
 - watch the tree-folded `~/.config/yazi`: the first `ya pkg` install writes `plugins/` and `package.toml` into the repo working tree; decide then whether to track them (the `dotfiles-ai` opencode-deps pattern) or gitignore them (the `dotfiles-wsl` git-identity pattern).

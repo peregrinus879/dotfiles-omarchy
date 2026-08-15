@@ -64,7 +64,6 @@ verify:
 	@fail=0; \
 	for pair in "$$HOME/.bashrc=bash/.bashrc" \
 	  "$$HOME/.config/bash/functions/dw=bash/.config/bash/functions/dw" \
-	  "$$HOME/.config/hypr/bindings.conf=hypr/.config/hypr/bindings.conf" \
 	  "$$HOME/.config/hypr/bindings.lua=hypr/.config/hypr/bindings.lua" \
 	  "$$HOME/.config/nvim/lua/plugins/obsidian.lua=nvim/.config/nvim/lua/plugins/obsidian.lua" \
 	  "$$HOME/.config/nvim/lua/plugins/render-markdown.lua=nvim/.config/nvim/lua/plugins/render-markdown.lua" \
@@ -103,8 +102,7 @@ clean:
 	@for d in ~/.config/bash/functions ~/.config/bash ~/.config/nvim/lua/plugins ~/.config/nvim/lua ~/.config/nvim ~/.config/yazi; do \
 	  if [[ -L "$$d" ]]; then rm -f "$$d"; fi; \
 	done
-	-rm -f ~/.bashrc ~/.config/hypr/bindings.conf ~/.config/hypr/bindings.lua \
-	  ~/.config/yazi/yazi.toml \
+	-rm -f ~/.bashrc ~/.config/hypr/bindings.lua ~/.config/yazi/yazi.toml \
 	  ~/.config/bash/functions/dw \
 	  ~/.config/nvim/lua/plugins/obsidian.lua ~/.config/nvim/lua/plugins/render-markdown.lua
 

@@ -40,6 +40,7 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 
 ### Hyprland
 
+- **Quattro transition (in progress):** `bindings.conf` is the live config on Omarchy 3.8.4; `bindings.lua` is the quattro successor, personal overrides only, loaded after the Omarchy defaults and inert until the 4.0 Lua cutover. It carries the same personal set as below, expressed natively: `hl.unbind` retires the twelve default web-app bindings, the `SUPER ALT` web-app set and the AppImages binding are re-added via `o.bind`, Gmail takes `SUPER ALT G` from the group-tiling default, and the personal Tmux binding is dropped because quattro's default is functionally identical. The bindings.conf bullets below describe the 3.8.4 state and are rewritten at the cutover.
 - `bindings.conf` preserves the Omarchy default bindings layout at the top, with the documented exceptions below, for easier diffing against upstream.
 - Upstream's ten default web-app bindings (ChatGPT, Grok, Calendar, Email, YouTube, WhatsApp, Google Messages, Google Photos, X, X Post; active in the upstream default) are intentionally kept commented out; the personal `SUPER ALT` web-app set below replaces them.
 - Upstream's trailing `# Logitech MX Keys` example block is intentionally omitted.

@@ -34,7 +34,7 @@ Each top-level directory is a GNU Stow package that symlinks into `$HOME`:
 
 ```text
 bash/   Bash overrides (.bashrc with Omarchy defaults sourced + personal additions, dw workspace function)
-hypr/   Hyprland personal application keybindings (bindings.conf)
+hypr/   Hyprland personal application keybindings (bindings.conf, live on 3.8.4; bindings.lua, quattro successor)
 nvim/   Additive Neovim plugin specs for the vault workflow (obsidian.lua, render-markdown.lua)
 yazi/   Yazi file manager config (yazi.toml, no theme)
 ```
@@ -45,7 +45,7 @@ Key ownership rules:
 - `bash/` owns `~/.bashrc`, sources Omarchy defaults, and adds personal overrides below, including the interactive OpenCode skill-isolation and search environment; `dotfiles-ai` owns the OpenCode configuration itself
 - `yazi/` is purely additive since Yazi is not part of Omarchy
 - `nvim/` is purely additive plugin specs on top of the `omarchy-nvim` base; the vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`)
-- `hypr/` owns `~/.config/hypr/bindings.conf` with Omarchy defaults preserved and personal application bindings appended at the end
+- `hypr/` owns `~/.config/hypr/bindings.conf` (live on 3.8.4, Omarchy defaults preserved with personal bindings appended) and `~/.config/hypr/bindings.lua` (quattro successor, personal overrides only, inert until the Lua cutover)
 - no theme files are tracked; Omarchy manages themes
 - repo-root `.claude/settings.json` and `opencode.json` are per-tool project allowlists for this repo's verification make targets (`verify`, `lint`); they are not stowed
 

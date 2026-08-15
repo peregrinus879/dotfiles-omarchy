@@ -47,7 +47,6 @@ Key ownership rules:
 - `nvim/` is purely additive plugin specs on top of the `omarchy-nvim` base; the vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`)
 - `hypr/` owns `~/.config/hypr/bindings.lua`: personal overrides only, loaded after the Omarchy defaults; all other Hyprland config is Omarchy-owned and untracked
 - no theme files are tracked; Omarchy manages themes
-- repo-root `.claude/settings.json` and `opencode.json` are per-tool project allowlists for this repo's verification make targets (`verify`, `lint`); they are not stowed
 
 ## Setup
 

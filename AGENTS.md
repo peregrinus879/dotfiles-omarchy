@@ -6,7 +6,6 @@ Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles managed with [G
 
 - Claude Code loads this file through the root `CLAUDE.md` `@AGENTS.md` import; skills load on invocation only.
 - The `Makefile` is the single source of the package list; `README.md` carries the human-facing setup, verification, and maintenance detail.
-- Repo-root `.claude/settings.json` and `opencode.json` are per-tool project allowlists for this repo's verification make targets (`verify`, `lint`).
 
 ## Invariants
 

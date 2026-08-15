@@ -31,7 +31,7 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 
 ### Bash
 
-- `.bashrc` sources Omarchy defaults from `~/.local/share/omarchy/default/bash/rc`, then adds personal overrides below.
+- `.bashrc` opens with the upstream quattro preamble (sources `/etc/omarchy.conf` when present, defaults `OMARCHY_PATH` to `/usr/share/omarchy`, and sources `$OMARCHY_PATH/default/bash/rc`), then adds personal overrides below. The preamble is upstream-authored, written through the stow symlink by the quattro upgrade, and is kept verbatim.
 - Interactive Bash exports `OPENCODE_DISABLE_EXTERNAL_SKILLS=1` and `OPENCODE_ENABLE_EXA=1` so terminal-launched OpenCode selects its managed skills and exposes its configured web-search tool. `dotfiles-ai` owns OpenCode configuration; this repo owns the Omarchy host environment. Non-interactive launchers supply both variables explicitly.
 - `claude` is aliased to add `--effort ultracode`, so every interactive launch, including `cx` and `tdl`-launched AIs, inherits it via alias expansion; scripts and hooks stay plain. Ultracode is session-only upstream and cannot be set in `settings.json`.
 - `EDITOR=nvim` is exported, overriding the Omarchy quattro default (`omarchy-launch-editor --inline`), so `dw`, tmux, and git resolve the editor deterministically.

@@ -39,7 +39,7 @@ help:
 	@echo "  dry-run   Preview stow actions without making changes"
 	@echo "  restow    Re-stow after repo content changes"
 	@echo "  verify    Check symlinks, bash syntax, and twin-file sync"
-	@echo "  clean     Remove files that would conflict with stow (README Prepare steps)"
+	@echo "  clean     Guarded stow preparation: owned links and clobber artifacts only (scripts/prepare-stow.sh)"
 	@echo "  recover   Re-apply after omarchy-reinstall-configs (clean + restow)"
 	@echo "  lint      ShellCheck over the bash package (.shellcheckrc holds the disable list)"
 
@@ -97,19 +97,11 @@ verify:
 	done; \
 	exit $$fail
 
-# Remove tree-folded directory symlinks first (deepest first); without this,
-# the per-file removals below would resolve THROUGH a folded symlink and
-# delete tracked files from the repo working tree.
 clean:
-	@for d in ~/.config/bash/functions ~/.config/bash ~/.config/nvim/lua/plugins ~/.config/nvim/lua ~/.config/nvim ~/.config/yazi; do \
-	  if [[ -L "$$d" ]]; then rm -f "$$d"; fi; \
-	done
-	-rm -f ~/.bashrc ~/.config/hypr/bindings.lua ~/.config/yazi/yazi.toml \
-	  ~/.config/bash/functions/dw \
-	  ~/.config/nvim/lua/plugins/obsidian.lua ~/.config/nvim/lua/plugins/render-markdown.lua
+	@bash scripts/prepare-stow.sh
 
 recover: clean restow
 
 lint:
-	shellcheck -s bash bash/.bashrc bash/.config/bash/functions/*
+	shellcheck -s bash bash/.bashrc bash/.config/bash/functions/* scripts/*.sh
 	@echo "ok:   shellcheck clean"

@@ -83,19 +83,11 @@ Checklist before stowing:
 - The vault is synced to `~/Projects/vault` (or `OBSIDIAN_VAULT` is set) if you use the Obsidian workflow
 - Any existing conflicting files were removed
 
-Remove existing files that would conflict with stow. The first loop removes tree-folded directory symlinks left by a previous stow; without it, the per-file removals would resolve through a folded symlink and delete tracked files from the repo:
+Remove existing files that would conflict with stow. The guarded preparation script removes only symlinks that resolve into this repo (tree-folded directory links first, so per-file removals never resolve through a fold into the repo) and regular files at owned paths (Omarchy clobber artifacts); anything unrecognized aborts the run untouched:
 
 ```bash
-for d in ~/.config/bash/functions ~/.config/bash ~/.config/nvim/lua/plugins ~/.config/nvim/lua ~/.config/nvim ~/.config/yazi; do
-  [[ -L "$d" ]] && rm -f "$d"
-done
-
-rm -f ~/.bashrc
-rm -f ~/.config/bash/functions/dw
-rm -f ~/.config/hypr/bindings.lua
-rm -f ~/.config/nvim/lua/plugins/obsidian.lua
-rm -f ~/.config/nvim/lua/plugins/render-markdown.lua
-rm -f ~/.config/yazi/yazi.toml
+cd ~/Projects/repos/dotfiles/dotfiles-omarchy
+make clean
 ```
 
 ### 4. Stow
@@ -168,7 +160,7 @@ A repo-root `Makefile` keeps the package list in one place and wraps the routine
 
 - `make stow` / `make unstow` / `make dry-run` / `make restow` - the stow command sets from Setup
 - `make verify` - the Verify symlink checks, bash syntax, and the nvim twin-spec sync check against `dotfiles-wsl`
-- `make clean` - the Prepare cleanup steps
+- `make clean` - guarded stow preparation (`scripts/prepare-stow.sh`); owned links and clobber artifacts only, aborts on anything unrecognized
 - `make recover` - the Recovery steps after `omarchy-reinstall-configs` (clean + restow)
 - `make lint` - ShellCheck over the bash package; `.shellcheckrc` disables the pre-existing upstream-derived warnings so new issues stand out
 

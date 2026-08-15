@@ -35,7 +35,7 @@ Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles managed with [G
 
 ## Deferred Items
 
-- resync `dotfiles-wsl` to the Omarchy 4.0 baseline via `/synchronize` on the WSL host (the quattro upgrade completed here 2026-08-15); the verified 3.8.4-to-quattro drift list lives in the WSL section of `~/Projects/scratch/2026-08-11-omarchy-quattro-upgrade-runbook.md`.
+- resync `dotfiles-wsl` to the Omarchy 4.0 baseline via its sync skill on the WSL host (the quattro upgrade completed here 2026-08-15), and mirror this repo's skill rename (synchronize to omasync) there for family consistency; the verified 3.8.4-to-quattro drift list lives in the WSL section of `~/Projects/scratch/2026-08-11-omarchy-quattro-upgrade-runbook.md`.
 - upstream `tdl` still ends with `select-pane -t "$opencode_pane"` on a variable it never sets, verified at v4.0.0 `default/bash/fns/tmux` on 2026-08-15 (cosmetic focus regression; `post-4.0-fixes` does not touch it).
 - close or rework basecamp/omarchy#5256 (the `tdl` passthrough-guard PR from this account); the local guard was removed as ineffective on 2026-08-11.
 - watch the tree-folded `~/.config/yazi`: the first `ya pkg` install writes `plugins/` and `package.toml` into the repo working tree; decide then whether to track them (the `dotfiles-ai` opencode-deps pattern) or gitignore them (the `dotfiles-wsl` git-identity pattern).
@@ -44,4 +44,4 @@ Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles managed with [G
 
 ## Skills
 
-- `/synchronize` - sync personal customizations against Omarchy references and official docs
+- `/omasync` - sync personal customizations against Omarchy references, installed defaults, and official docs

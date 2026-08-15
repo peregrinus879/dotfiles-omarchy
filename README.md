@@ -174,7 +174,7 @@ A repo-root `Makefile` keeps the package list in one place and wraps the routine
 
 `make stow`, `make restow`, and `make recover` finish with a forced Hyprland reload and config-error check when run inside a Hyprland session (rationale in the Makefile header); `make verify` runs the same check read-only.
 
-Periodically, review the local reference repos and official docs for upstream changes to overridden items, sync with `/omasync` or a manual comparison, and confirm every intentional difference is still documented in `DEVIATIONS.md`.
+Periodically, review the local reference repos and official docs for upstream changes to overridden items, sync with `/omasync` or a manual comparison, and confirm every intentional difference is still documented in `DEVIATIONS.md`. Durable findings, known limitations, and deferred items live in [docs/maintenance.md](docs/maintenance.md).
 
 ## Related Repos
 

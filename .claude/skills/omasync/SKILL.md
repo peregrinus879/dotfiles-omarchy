@@ -14,7 +14,7 @@ Local reference clones live under `~/Projects/repos/references/`:
 - `omarchy/` - main repo for bash, tmux, and general Omarchy defaults; tracks the upstream default branch, which upstream moves between releases (re-resolve with `git remote set-head origin -a`, then match the checkout), so pin release comparisons to the installed version's tag (`git show v4.0.0:<path>`)
 - `obsidian.nvim/` - obsidian.nvim upstream for the vault plugin spec
 
-The installed defaults the machine actually runs live under `/usr/share/omarchy` (package-backed since quattro). Upstream URLs, official docs, and descriptions live in `DEVIATIONS.md` (Reference Sources). Durable findings and deferred items live in `docs/maintenance.md`; sibling ledgers live at `~/Projects/repos/dotfiles/dotfiles-ai/docs/maintenance.md` and the `dotfiles-wsl` equivalent.
+The installed defaults the machine actually runs live under `/usr/share/omarchy` (package-backed since quattro). The shipped `omarchy` agent skill (auto-discovered via `~/.claude/skills/omarchy`; package copy at `/usr/share/omarchy/default/agents/skills/omarchy`) is upstream-owned, refreshed with Omarchy updates, and authoritative for desktop-config editing; never fork it into this repo. Upstream URLs, official docs, and descriptions live in `DEVIATIONS.md` (Reference Sources). Durable findings and deferred items live in `docs/maintenance.md`; sibling ledgers live at `~/Projects/repos/dotfiles/dotfiles-ai/docs/maintenance.md` and the `dotfiles-wsl` equivalent.
 
 ## When To Use
 
@@ -30,8 +30,8 @@ The installed defaults the machine actually runs live under `/usr/share/omarchy`
    - `cx` alias against `omarchy/default/bash/aliases`
    - `tdl` function against `omarchy/default/bash/fns/tmux`
    - `y()` function is additive (Yazi is not in Omarchy)
-3. Compare `hypr/bindings.lua` against the installed quattro defaults at `/usr/share/omarchy/default/hypr/bindings/` (`applications.lua` carries the app and web-app set) and the user seed at `/usr/share/omarchy/config/hypr/bindings.lua`:
-   - every `hl.unbind` target must still match a default chord, and personal chords must not collide with new defaults (`omarchy menu keybindings --print` shows the live merge)
+3. Compare `hypr/bindings.lua` against the installed defaults at `/usr/share/omarchy/default/hypr/bindings/` (`applications.lua` carries the app and web-app set) and the user seed at `/usr/share/omarchy/config/hypr/bindings.lua`; the shipped `omarchy` skill owns the binding API, inspection commands, and validation loop:
+   - every `hl.unbind` target must still match a default chord, and personal chords must not collide with new defaults
    - verify live registration by description and modmask via `hyprctl binds`; quattro registers Lua bindings as opaque `__lua` dispatchers, so exec strings never appear there
    - the file stays personal overrides only; defaults are never replicated
 4. Compare `yazi/yazi.toml` against official Yazi docs, and the `nvim/` plugin specs against `obsidian.nvim/` and the render-markdown.nvim README
@@ -61,7 +61,8 @@ The installed defaults the machine actually runs live under `/usr/share/omarchy`
 - Omarchy, official docs, official package docs, and `DEVIATIONS.md` are the source of truth for default behavior and intentional differences
 - Always check all relevant sources, not just one
 - Never assume a difference is intentional without verifying it is documented in `DEVIATIONS.md`
-- Do not copy Omarchy default behavior into this repo if Omarchy already manages it
+- Do not copy Omarchy default behavior into this repo if Omarchy already manages it; the deviation policy extends to skills, so defer to the shipped `omarchy` skill rather than duplicating its content here
+- Load the shipped `omarchy` skill before editing any Hyprland or desktop config; keep only repo-specific rules in this file
 - Keep the Bash overrides minimal: source Omarchy defaults, only override what needs to change
 - Keep Yazi config standalone since Yazi is not part of Omarchy
 - Package removals: the pacman dependency graph is necessary but not sufficient; also check runtime plugin loading (`qt5-wayland`/`qt6-wayland` style), tools exec'd by Omarchy scripts (`grep -r` the `/usr/share/omarchy` tree), and .NET framework targets (`*.runtimeconfig.json` against installed runtimes)

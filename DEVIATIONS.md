@@ -46,7 +46,7 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 - `SUPER ALT G` launches Gmail, taking the key from the default "move window out of group" tiling binding; that default is knowingly sacrificed.
 - The pre-quattro personal Tmux binding is dropped: quattro's `SUPER ALT RETURN` default is functionally identical (tmux attach or new "Work" session in the terminal cwd).
 - The preinstalled app and TUI bindings (Music, Docker, Signal, Obsidian, Omawrite, Passwords, Herdr, Tmux) stay on Omarchy defaults.
-- All other Hyprland config (`hyprland.lua`, `monitors.lua`, `input.lua`, `looknfeel.lua`, `autostart.lua`) is Omarchy-owned and untracked; machine-local values (display scale, keyboard layouts, NVIDIA env, decoration) live there directly.
+- All other Hyprland config (`hyprland.lua`, `monitors.lua`, `input.lua`, `looknfeel.lua`, `autostart.lua`) is Omarchy-owned and untracked; machine-local values (display resolution and scale, keyboard layouts, touchpad scrolling) live there directly.
 
 ### Neovim
 

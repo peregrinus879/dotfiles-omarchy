@@ -11,10 +11,10 @@ Source configs from reference repos and official docs, compare against `dotfiles
 
 Local reference clones live under `~/Projects/repos/references/`:
 
-- `omarchy/` - main repo for bash, tmux, and general Omarchy defaults
+- `omarchy/` - main repo for bash, tmux, and general Omarchy defaults; tracks the upstream default branch, which upstream moves between releases (re-resolve with `git remote set-head origin -a`, then match the checkout), so pin release comparisons to the installed version's tag (`git show v4.0.0:<path>`)
 - `obsidian.nvim/` - obsidian.nvim upstream for the vault plugin spec
 
-Upstream URLs, official docs, and descriptions live in `DEVIATIONS.md` (Reference Sources).
+The installed defaults the machine actually runs live under `/usr/share/omarchy` (package-backed since quattro). Upstream URLs, official docs, and descriptions live in `DEVIATIONS.md` (Reference Sources).
 
 ## When To Use
 
@@ -29,9 +29,9 @@ Upstream URLs, official docs, and descriptions live in `DEVIATIONS.md` (Referenc
    - `cx` alias against `omarchy/default/bash/aliases`
    - `tdl` function against `omarchy/default/bash/fns/tmux`
    - `y()` function is additive (Yazi is not in Omarchy)
-2. Compare `hypr/bindings.conf` against the installed default `~/.local/share/omarchy/config/hypr/bindings.conf` (the reference repo migrated Hyprland bindings to Lua, so `omarchy/config/hypr/` no longer carries `bindings.conf`):
-   - Omarchy default bindings at the top should match the installed default, except the deviations documented in `DEVIATIONS.md`
-   - Personal bindings at the end are user customizations
+2. Compare `hypr/bindings.lua` against the installed quattro defaults at `/usr/share/omarchy/default/hypr/bindings/` (`applications.lua` carries the app and web-app set) and the user seed at `/usr/share/omarchy/config/hypr/bindings.lua`:
+   - every `hl.unbind` target must still match a default chord, and personal chords must not collide with new defaults (`omarchy menu keybindings --print` shows the live merge)
+   - the file stays personal overrides only; defaults are never replicated
 3. Compare `yazi/yazi.toml` against official Yazi docs, and the `nvim/` plugin specs against `obsidian.nvim/` and the render-markdown.nvim README
 4. For each difference, classify it:
    - **Intentional personal customization**: documented in `DEVIATIONS.md`, should stay different

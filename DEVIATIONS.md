@@ -4,7 +4,7 @@
 
 This document records the intentional differences carried by `dotfiles-omarchy` relative to [Omarchy](https://github.com/basecamp/omarchy) defaults, and defines the boundary between personal desktop customizations and Omarchy-managed behavior.
 
-Omarchy remains the upstream reference. This repo carries only targeted personal deviations applied via GNU Stow.
+Omarchy is the upstream reference. This repo carries only targeted personal deviations applied via GNU Stow.
 
 ## Deviation Policy
 
@@ -31,7 +31,7 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 
 ### Bash
 
-- `.bashrc` opens with the upstream quattro preamble (sources `/etc/omarchy.conf` when present, defaults `OMARCHY_PATH` to `/usr/share/omarchy`, and sources `$OMARCHY_PATH/default/bash/rc`), then adds personal overrides below. The preamble is upstream-authored, written through the stow symlink by the quattro upgrade, and is kept verbatim.
+- `.bashrc` opens with the upstream quattro preamble (sources `/etc/omarchy.conf` when present, defaults `OMARCHY_PATH` to `/usr/share/omarchy`, and sources `$OMARCHY_PATH/default/bash/rc`), then adds personal overrides below. The preamble is upstream-authored and kept verbatim; Omarchy writes to `.bashrc` reach the repo file through the stow symlink.
 - Interactive Bash exports `OPENCODE_DISABLE_EXTERNAL_SKILLS=1` and `OPENCODE_ENABLE_EXA=1` so terminal-launched OpenCode selects its managed skills and exposes its configured web-search tool. `dotfiles-ai` owns OpenCode configuration; this repo owns the Omarchy host environment. Non-interactive launchers supply both variables explicitly.
 - `claude` is aliased to add `--effort ultracode`, so every interactive launch, including `cx` and `tdl`-launched AIs, inherits it via alias expansion; scripts and hooks stay plain. Ultracode is session-only upstream and cannot be set in `settings.json`. This intentionally overrides the `effortLevel` pin `dotfiles-ai` tracks for interactive Omarchy sessions; its pinned bridges (`spar-claude`) are unaffected since scripts do not expand aliases.
 - `EDITOR=nvim` is exported, overriding the Omarchy quattro default (`omarchy-launch-editor --inline`), so `dw`, tmux, and git resolve the editor deterministically.
@@ -43,15 +43,14 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 - `bindings.lua` is the only tracked Hyprland file: personal overrides, loaded after the Omarchy defaults through the Omarchy-owned `~/.config/hypr/hyprland.lua` require chain. No defaults are replicated.
 - The twelve default web-app bindings (ChatGPT, Grok, Calendar, Email, New email, YouTube, WhatsApp, Google Messages, Google Photos, Google Maps, X, X Post) are retired via `hl.unbind`; the personal `SUPER ALT` web-app set replaces them (Claude, Gmail, GitHub, LinkedIn, CFI, M365 Copilot, Proton, Teams, WhatsApp, X, YouTube).
 - `SUPER SHIFT A` launches the AppImages manager, taking the key from the default ChatGPT web app.
-- `SUPER G` launches the ChatGPT desktop app (`omarchy-install-ai-chatgpt`, launch-or-focus on class `chatgpt`), taking the key from the default window-grouping toggle; grouping was already given up when Gmail took `SUPER ALT G`.
+- `SUPER G` launches the ChatGPT desktop app (`omarchy-install-ai-chatgpt`, launch-or-focus on class `chatgpt`), taking the key from the default window-grouping toggle; grouping is also given up at `SUPER ALT G` (Gmail).
 - `SUPER ALT G` launches Gmail, taking the key from the default "move window out of group" tiling binding; that default is knowingly sacrificed.
-- The pre-quattro personal Tmux binding is dropped: quattro's `SUPER ALT RETURN` default is functionally identical (tmux attach or new "Work" session in the terminal cwd).
 - The preinstalled app and TUI bindings (Music, Docker, Signal, Obsidian, Omawrite, Passwords, Herdr, Tmux) stay on Omarchy defaults.
 - All other Hyprland config (`hyprland.lua`, `monitors.lua`, `input.lua`, `looknfeel.lua`, `autostart.lua`) is Omarchy-owned and untracked; machine-local values (display resolution and scale, keyboard layouts, touchpad scrolling) live there directly.
 
 ### Neovim
 
-- `omarchy-nvim` owns the base Neovim config. This repo adds two additive plugin specs for the vault workflow, adopted from the vault's former `nvim-vault` package.
+- `omarchy-nvim` owns the base Neovim config. This repo adds two additive plugin specs for the vault workflow.
 - `obsidian.lua` configures obsidian.nvim against the vault at `~/Projects/vault` (override with `OBSIDIAN_VAULT`), including slug-rename and promote workflows that shell out to the vault's `normalize.py`, plus confirm-prompted delete workflows.
 - `render-markdown.lua` adds visual markdown rendering; a companion, not required by obsidian.nvim.
 - Runtime dependencies beyond the base install: `ripgrep`, `python3`, and `wl-clipboard`, all present on Omarchy.

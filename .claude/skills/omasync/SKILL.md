@@ -11,10 +11,10 @@ Source configs from the installed Omarchy defaults, the reference repos, and off
 
 Local reference clones live under `~/Projects/repos/references/`:
 
-- `omarchy/` - main repo for bash, tmux, and general Omarchy defaults; tracks the upstream default branch, which upstream moves between releases (re-resolve with `git remote set-head origin -a`, then match the checkout), so pin release comparisons to the installed version's tag (`git show v4.0.0:<path>`)
+- `omarchy/` - main repo for bash, tmux, and general Omarchy defaults; tracks the upstream default branch, which upstream moves between releases (re-resolve with `git remote set-head origin -a`, then match the checkout), so pin release comparisons to the installed version's tag (`git show <installed-tag>:<path>`)
 - `obsidian.nvim/` - obsidian.nvim upstream for the vault plugin spec
 
-The installed defaults the machine actually runs live under `/usr/share/omarchy` (package-backed since quattro). The shipped `omarchy` agent skill (auto-discovered via `~/.claude/skills/omarchy`; package copy at `/usr/share/omarchy/default/agents/skills/omarchy`) is upstream-owned, refreshed with Omarchy updates, and authoritative for desktop-config editing; never fork it into this repo. Upstream URLs, official docs, and descriptions live in `DEVIATIONS.md` (Reference Sources). Durable findings and deferred items live in `docs/maintenance.md`; sibling ledgers live at `~/Projects/repos/dotfiles/dotfiles-ai/docs/maintenance.md` and the `dotfiles-wsl` equivalent.
+The installed defaults the machine actually runs live under `/usr/share/omarchy` (package-backed). The shipped `omarchy` agent skill (auto-discovered via `~/.claude/skills/omarchy`; package copy at `/usr/share/omarchy/default/agents/skills/omarchy`) is upstream-owned, refreshed with Omarchy updates, and authoritative for desktop-config editing; never fork it into this repo. Upstream URLs, official docs, and descriptions live in `DEVIATIONS.md` (Reference Sources). Durable findings and deferred items live in `docs/maintenance.md`; sibling ledgers live at `~/Projects/repos/dotfiles/dotfiles-ai/docs/maintenance.md` and the `dotfiles-wsl` equivalent.
 
 ## When To Use
 
@@ -36,7 +36,7 @@ The installed defaults the machine actually runs live under `/usr/share/omarchy`
    - the file stays personal overrides only; defaults are never replicated
 4. Compare `yazi/yazi.toml` against official Yazi docs, and the `nvim/` plugin specs against `obsidian.nvim/` and the render-markdown.nvim README
 5. App parity sweep: diff `pacman -Qe` against the installed default manifest (`/usr/share/omarchy/install/omarchy-base.packages` plus hardware conditionals) and the optional installers (`omarchy-install-*`); classify each extra as personal, optional-installed, or retired survivor, and account for provider resolution (`extra/neovim` satisfies the `nvim` entry)
-6. Tool-path integrity: every managed CLI in `~/.local/bin` (claude, codex, opencode, gemini, copilot, gh, and the rest) must be the Omarchy mise wrapper; `omarchy-refresh-applications` deletes and rewrites them, so verify with `head -3` on each and `mise ls`. Hand-installed scripts are unmanaged and survive. Old native install stores are removable only after confirming the running binary path via `/proc/<pid>/exe`
+6. Tool-path integrity: every managed CLI in `~/.local/bin` (claude, codex, opencode, gemini, copilot, gh, and the rest) must be the Omarchy mise wrapper; `omarchy-refresh-applications` deletes and rewrites them, so verify with `head -3` on each and `mise ls`. Hand-installed scripts are unmanaged and survive. Native install stores are removable only after confirming the running binary path via `/proc/<pid>/exe`
 7. Webapp entries: compare the webapp launchers in `~/.local/share/applications` against the current Omarchy default set and remove stale ones with `omarchy-webapp-remove`; personal bindings launch by URL and do not depend on desktop entries
 8. Cross-repo coordination: read the sibling ledgers for items assigned to this repo and for stale entries describing this host's environment; after Omarchy migrations run, re-check the four agent-skills dirs (`~/.agents/skills`, `~/.claude/skills`, `~/.codex/skills`, `~/.pi/agent/skills`) and the `omarchy-crash-watch.service` state
 9. For each difference, classify it:

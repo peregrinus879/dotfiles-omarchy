@@ -12,7 +12,7 @@ Read this file before package removals, Omarchy updates or refreshes, work on a 
 ## Deferred Items
 
 - resync `dotfiles-wsl` to the Omarchy 4.0 baseline on the WSL host: its `AGENTS.md` Deferred Items are self-contained (consolidation commit 9361386: inlined drift list, omasync mirror-rename, dotfiles-ai host-pass pointer); the laptop-local scratch runbook is fully superseded and can be archived.
-- dotfiles-ai post-quattro absorption session: record diagnose-crash ownership (see the migration item below); re-check the spar bridges' 30-second preflights against cold mise-wrapper first-call installs; add the effort-pin cross-reference (this repo's interactive `claude --effort ultracode` alias overrides its tracked `effortLevel xhigh` pin).
+- dotfiles-ai quattro absorption session: record diagnose-crash ownership (see the migration item below); re-check the spar bridges' 30-second preflights against cold mise-wrapper first-call installs; add the effort-pin cross-reference (this repo's interactive `claude --effort ultracode` alias overrides its tracked `effortLevel xhigh` pin).
 - upstream `tdl` ends with `select-pane -t "$opencode_pane"` on a variable it never sets, verified at v4.0.0 `default/bash/fns/tmux` on 2026-08-15 (cosmetic focus regression; `post-4.0-fixes` does not touch it).
 - close or rework basecamp/omarchy#5256 (the `tdl` passthrough-guard PR from this account); no local guard is tracked (the guard approach is ineffective).
 - watch the tree-folded `~/.config/yazi`: the first `ya pkg` install writes `plugins/` and `package.toml` into the repo working tree; decide then whether to track them (the `dotfiles-ai` opencode-deps pattern) or gitignore them (the `dotfiles-wsl` git-identity pattern).

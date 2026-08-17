@@ -10,7 +10,7 @@ PACKAGES := bash hypr nvim yazi
 SIBLING := $(HOME)/Projects/repos/dotfiles/dotfiles-wsl
 TWIN_SPECS := nvim/.config/nvim/lua/plugins/obsidian.lua \
   nvim/.config/nvim/lua/plugins/render-markdown.lua \
-  bash/.config/bash/functions/dw \
+  bash/.config/bash/functions/tdw \
   yazi/.config/yazi/yazi.toml
 
 .PHONY: help stow unstow dry-run restow verify clean recover lint

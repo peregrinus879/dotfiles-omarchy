@@ -28,7 +28,7 @@ owned_files=(
   ~/.config/hypr/input.lua
   ~/.config/hypr/looknfeel.lua
   ~/.config/yazi/yazi.toml
-  ~/.config/bash/functions/dw
+  ~/.config/bash/functions/tdw
   ~/.config/bash/functions/hdw
   ~/.config/nvim/lua/plugins/obsidian.lua
   ~/.config/nvim/lua/plugins/render-markdown.lua

@@ -17,7 +17,7 @@ Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles managed with [G
 - The vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`) for the obsidian.nvim workflow.
 - Git identity lives in the untracked per-host `~/.config/git/config.local`.
 - Interactive Bash exports `OPENCODE_DISABLE_EXTERNAL_SKILLS=1` and `OPENCODE_ENABLE_EXA=1` so terminal-launched OpenCode uses its managed skills and exposes web search. `dotfiles-ai` owns OpenCode configuration; this repo owns the Omarchy host environment. Non-interactive launchers supply the same variables explicitly.
-- `hypr/bindings.lua` carries personal Hyprland overrides only (the twelve default web-app bindings retired via `hl.unbind`, the personal `SUPER ALT` set and AppImages added), loaded after the Omarchy defaults; no defaults are replicated (deviations documented in `DEVIATIONS.md`).
+- The `hypr` package carries personal Hyprland overrides only, loaded after the Omarchy defaults through the Omarchy-owned `~/.config/hypr/hyprland.lua` require chain: `bindings.lua` (the twelve default web-app bindings retired via `hl.unbind`, the personal `SUPER ALT` set and AppImages added) and `monitors.lua` (display values plus the NVIDIA client env workaround); no defaults are replicated (deviations documented in `DEVIATIONS.md`).
 - Keep every intentional difference documented in `DEVIATIONS.md`; update `README.md`, `AGENTS.md`, and `DEVIATIONS.md` together when ownership, setup, or sync assumptions change.
 
 ## Post-Change Verification

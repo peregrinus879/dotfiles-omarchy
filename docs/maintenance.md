@@ -5,7 +5,7 @@ Read this file before package removals, Omarchy updates or refreshes, work on a 
 ## Known Limitations
 
 - `omarchy-reinstall-configs` (on quattro via `cp -af /etc/skel/. ~/`) and `omarchy-refresh-config` copy defaults with no symlink awareness, writing through stow symlinks into this repo's files; if either runs, `git restore` the clobbered repo files first, then run `make recover`.
-- `omarchy-refresh-hyprland` refreshes every `~/.config/hypr` Lua file including the stowed `bindings.lua`; the `cp -f` writes the shipped default through the symlink into the repo working tree (the link survives, a timestamped `.bak` of the personal content is left beside it). Recovery is `git restore hypr/.config/hypr/bindings.lua`. Verified against the installed 4.0.0 scripts on 2026-08-15.
+- `omarchy-refresh-hyprland` refreshes every `~/.config/hypr` Lua file including the stowed ones; the `cp -f` writes the shipped default through each symlink into the repo working tree (the links survive, a timestamped `.bak` of the personal content is left beside each). Recovery is `git restore hypr/.config/hypr/`. Verified against the installed 4.0.0 scripts on 2026-08-15.
 - Stow tree-folds `~/.config/yazi` into a directory symlink pointing at the repo, so anything written there lands in the repo working tree; folding is the accepted repo-family stow convention (do not add `--no-folding`).
 - `qt6-wayland` reads as a pacman orphan but carries Quickshell and every Qt6 app at runtime (platform plugins load without a pacman dependency edge) and is marked explicit. Never remove `pacman -Qdtq` output as a batch on this machine.
 

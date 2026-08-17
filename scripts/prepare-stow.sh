@@ -24,6 +24,7 @@ fold_dirs=(
 owned_files=(
   ~/.bashrc
   ~/.config/hypr/bindings.lua
+  ~/.config/hypr/monitors.lua
   ~/.config/yazi/yazi.toml
   ~/.config/bash/functions/dw
   ~/.config/bash/functions/hdw

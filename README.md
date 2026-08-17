@@ -26,7 +26,7 @@ Local clones live side by side under `~/Projects/repos/dotfiles/`.
 - **Bash**: Personal alias, function, and OpenCode host-environment overrides on top of Omarchy defaults
 - **Editor**: [obsidian.nvim](https://github.com/obsidian-nvim/obsidian.nvim) and [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim) plugin specs on the `omarchy-nvim` base
 - **File Manager**: [Yazi](https://github.com/sxyazi/yazi) (not part of Omarchy)
-- **Desktop**: [Hyprland](https://github.com/hyprwm/Hyprland) personal application keybindings
+- **Desktop**: [Hyprland](https://github.com/hyprwm/Hyprland) personal keybindings and display config
 
 ## Package Layout
 
@@ -34,7 +34,7 @@ Each top-level directory is a GNU Stow package that symlinks into `$HOME`:
 
 ```text
 bash/   Bash overrides (.bashrc with Omarchy defaults sourced + personal additions, dw and hdw workspace functions)
-hypr/   Hyprland personal application keybindings (bindings.lua)
+hypr/   Hyprland personal overrides (bindings.lua, monitors.lua)
 nvim/   Additive Neovim plugin specs for the vault workflow (obsidian.lua, render-markdown.lua)
 yazi/   Yazi file manager config (yazi.toml, no theme)
 ```
@@ -45,7 +45,7 @@ Key ownership rules:
 - `bash/` owns `~/.bashrc`, sources Omarchy defaults, and adds personal overrides below, including the interactive OpenCode skill-isolation and search environment; `dotfiles-ai` owns the OpenCode configuration itself
 - `yazi/` is purely additive since Yazi is not part of Omarchy
 - `nvim/` is purely additive plugin specs on top of the `omarchy-nvim` base; the vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`)
-- `hypr/` owns `~/.config/hypr/bindings.lua`: personal overrides only, loaded after the Omarchy defaults; all other Hyprland config is Omarchy-owned and untracked
+- `hypr/` owns `~/.config/hypr/bindings.lua` and `~/.config/hypr/monitors.lua`: personal overrides only, loaded after the Omarchy defaults; all other Hyprland config is Omarchy-owned and untracked
 - no theme files are tracked; Omarchy manages themes
 
 ## Setup
@@ -141,7 +141,7 @@ If the old clone is no longer available, run the full cleanup in section 3 befor
 
 `omarchy-reinstall-configs` overwrites `~/.bashrc` and `~/.config/` from Omarchy defaults (on quattro via `cp -af /etc/skel/. ~/`). After running it, `git restore` any repo files it clobbered through stow symlinks, then run `make recover` from the repo root (the Prepare cleanup plus a re-stow).
 
-`omarchy-refresh-hyprland` (and `omarchy-refresh-config` generally) copies shipped defaults over existing files with `cp -f`, which writes through a stow symlink into the repo working tree; the symlink itself survives and a timestamped `.bak` of the personal content is left beside it. After it runs, `git restore hypr/.config/hypr/bindings.lua` is the whole recovery.
+`omarchy-refresh-hyprland` (and `omarchy-refresh-config` generally) copies shipped defaults over existing files with `cp -f`, which writes through a stow symlink into the repo working tree; the symlink itself survives and a timestamped `.bak` of the personal content is left beside it. After it runs, `git restore hypr/.config/hypr/` is the whole recovery.
 
 ## Verify
 

@@ -28,7 +28,8 @@ alias claude='claude --effort ultracode'
 
 # Yazi cd-on-exit (Yazi is not part of Omarchy)
 y() {
-  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  local tmp cwd
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
   yazi "$@" --cwd-file="$tmp"
   if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
     builtin cd -- "$cwd"

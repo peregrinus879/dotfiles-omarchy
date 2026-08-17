@@ -47,7 +47,8 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 - `SUPER G` launches the ChatGPT desktop app (`omarchy-install-ai-chatgpt`, launch-or-focus on class `chatgpt`), taking the key from the default window-grouping toggle; grouping is also given up at `SUPER ALT G` (Gmail).
 - `SUPER ALT G` launches Gmail, taking the key from the default "move window out of group" tiling binding; that default is knowingly sacrificed.
 - The preinstalled app and TUI bindings (Music, Docker, Signal, Obsidian, Omawrite, Passwords, Herdr, Tmux) stay on Omarchy defaults.
-- All other Hyprland config (`hyprland.lua`, `input.lua`, `looknfeel.lua`, `autostart.lua`) is Omarchy-owned and untracked; machine-local values (keyboard layouts, touchpad scrolling) live there directly.
+- `input.lua` is tracked: `kb_layout = "us,ara"` with the Left Alt + Right Alt toggle (`grp:alts_toggle`; `kb_options` replaces the default string, so it restates the compose and caps settings), and touchpad `natural_scroll = true`.
+- All other Hyprland config (`hyprland.lua`, `looknfeel.lua`, `autostart.lua`) is Omarchy-owned and untracked.
 
 ### Neovim
 

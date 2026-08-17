@@ -15,7 +15,7 @@ Omarchy + WSL deviations        → dotfiles-wsl
 ```
 
 - [`dotfiles-ai`](https://github.com/peregrinus879/dotfiles-ai) - AI harness configs: Claude Code and OpenCode settings, shared guidance, and commit workflow
-- [`dotfiles-omarchy`](https://github.com/peregrinus879/dotfiles-omarchy) - Personal Omarchy customizations: Bash overrides, Hyprland bindings, Neovim plugins, and Yazi
+- [`dotfiles-omarchy`](https://github.com/peregrinus879/dotfiles-omarchy) - Personal Omarchy customizations: Bash overrides, Hyprland overrides, Neovim plugins, and Yazi
 - [`dotfiles-wsl`](https://github.com/peregrinus879/dotfiles-wsl) - Self-contained WSL Arch dotfiles: terminal baseline plus Windows Terminal, clipboard integration, and OpenCode theme
 
 Local clones live side by side under `~/Projects/repos/dotfiles/`.
@@ -26,7 +26,7 @@ Local clones live side by side under `~/Projects/repos/dotfiles/`.
 - **Bash**: Personal alias, function, and OpenCode host-environment overrides on top of Omarchy defaults
 - **Editor**: [obsidian.nvim](https://github.com/obsidian-nvim/obsidian.nvim) and [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim) plugin specs on the `omarchy-nvim` base
 - **File Manager**: [Yazi](https://github.com/sxyazi/yazi) (not part of Omarchy)
-- **Desktop**: [Hyprland](https://github.com/hyprwm/Hyprland) personal keybindings and display config
+- **Desktop**: [Hyprland](https://github.com/hyprwm/Hyprland) personal keybindings, display, input, and look-and-feel config
 
 ## Package Layout
 
@@ -152,6 +152,7 @@ After stowing or changing owned packages:
 - Start a fresh shell and confirm `type y` shows the Yazi cd-on-exit function.
 - Confirm `type tdw` shows the tmux workspace function; from a project directory, `tdw cc` or `tdw oc` opens its session (`-c` continues that agent's last conversation; bare `tdw` re-attaches an existing session).
 - Confirm `type hdw` shows the herdr workspace function; from a project directory, `hdw cc` or `hdw oc` opens its workspace (bare `hdw` refocuses; the herdr server is started headless when down, and if that start fails `hdw` attaches plain herdr, rerun it inside).
+- `hl.env` values in the tracked hypr files reach the compositor on reload but reach uwsm-launched clients only at session start; after first adopting the hypr package on a running session, log out and back in once.
 - Run `yazi` and confirm the layout ratio and sort order match the config.
 - Open a vault note in Neovim and confirm obsidian.nvim loads (`<leader>oo` opens the note switcher).
 

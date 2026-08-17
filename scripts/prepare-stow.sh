@@ -26,6 +26,7 @@ owned_files=(
   ~/.config/hypr/bindings.lua
   ~/.config/hypr/monitors.lua
   ~/.config/hypr/input.lua
+  ~/.config/hypr/looknfeel.lua
   ~/.config/yazi/yazi.toml
   ~/.config/bash/functions/dw
   ~/.config/bash/functions/hdw

@@ -34,7 +34,7 @@ Each top-level directory is a GNU Stow package that symlinks into `$HOME`:
 
 ```text
 bash/   Bash overrides (.bashrc with Omarchy defaults sourced + personal additions, dw and hdw workspace functions)
-hypr/   Hyprland personal overrides (bindings.lua, monitors.lua, input.lua)
+hypr/   Hyprland personal overrides (bindings.lua, monitors.lua, input.lua, looknfeel.lua)
 nvim/   Additive Neovim plugin specs for the vault workflow (obsidian.lua, render-markdown.lua)
 yazi/   Yazi file manager config (yazi.toml, no theme)
 ```
@@ -45,7 +45,7 @@ Key ownership rules:
 - `bash/` owns `~/.bashrc`, sources Omarchy defaults, and adds personal overrides below, including the interactive OpenCode skill-isolation and search environment; `dotfiles-ai` owns the OpenCode configuration itself
 - `yazi/` is purely additive since Yazi is not part of Omarchy
 - `nvim/` is purely additive plugin specs on top of the `omarchy-nvim` base; the vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`)
-- `hypr/` owns `~/.config/hypr/bindings.lua`, `~/.config/hypr/monitors.lua`, and `~/.config/hypr/input.lua`: personal overrides only, loaded after the Omarchy defaults; all other Hyprland config is Omarchy-owned and untracked
+- `hypr/` owns `~/.config/hypr/bindings.lua`, `~/.config/hypr/monitors.lua`, `~/.config/hypr/input.lua`, and `~/.config/hypr/looknfeel.lua`: personal overrides only, loaded after the Omarchy defaults; all other Hyprland config is Omarchy-owned and untracked
 - no theme files are tracked; Omarchy manages themes
 
 ## Setup

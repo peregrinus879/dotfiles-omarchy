@@ -48,7 +48,8 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 - `SUPER ALT G` launches Gmail, taking the key from the default "move window out of group" tiling binding; that default is knowingly sacrificed.
 - The preinstalled app and TUI bindings (Music, Docker, Signal, Obsidian, Omawrite, Passwords, Herdr, Tmux) stay on Omarchy defaults.
 - `input.lua` is tracked: `kb_layout = "us,ara"` with the Left Alt + Right Alt toggle (`grp:alts_toggle`; `kb_options` replaces the default string, so it restates the compose and caps settings), and touchpad `natural_scroll = true`.
-- All other Hyprland config (`hyprland.lua`, `looknfeel.lua`, `autostart.lua`) is Omarchy-owned and untracked.
+- `looknfeel.lua` is tracked: `gaps_in = 3`, `gaps_out = 6` (Omarchy defaults are 5 and 10), and `rounding = 6` with `rounding_power = 3` (the solitude theme's values; the Omarchy default is 0). User `looknfeel.lua` loads after the active theme's Hyprland fragment, so these hold under any theme; the Quickshell shell mirrors `decoration:rounding` into its menu, bar-item, OSD, and notification radii. The bar body slab itself never rounds; the window-no-gaps toggle forces rounding 0 while active.
+- All other Hyprland config (`hyprland.lua`, `autostart.lua`) is Omarchy-owned and untracked.
 
 ### Neovim
 

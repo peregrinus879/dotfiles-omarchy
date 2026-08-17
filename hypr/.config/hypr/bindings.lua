@@ -15,12 +15,9 @@ hl.unbind("SUPER + SHIFT + S")        -- Google Maps
 hl.unbind("SUPER + SHIFT + X")        -- X
 hl.unbind("SUPER + SHIFT + ALT + X")  -- X Post
 
--- Desktop apps
+-- Desktop apps; ChatGPT reuses the retired Calendar key
 o.bind("SUPER + SHIFT + A", "AppImages", "uwsm-app -- it.mijorus.gearlever")
-
--- ChatGPT app takes the key from the window-grouping toggle
-hl.unbind("SUPER + G")
-o.bind("SUPER + G", "ChatGPT", { launch = "chatgpt", focus = "^chatgpt$" })
+o.bind("SUPER + SHIFT + C", "ChatGPT", { launch = "chatgpt", focus = "^chatgpt$" })
 
 -- Web apps (SUPER + ALT); Gmail takes the key from the group tiling default
 hl.unbind("SUPER + ALT + G")

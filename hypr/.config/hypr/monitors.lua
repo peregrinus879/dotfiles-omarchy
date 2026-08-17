@@ -5,7 +5,7 @@ local omarchy_gdk_scale = 2
 local omarchy_monitor_scale = 1.6
 
 hl.env("GDK_SCALE", tostring(omarchy_gdk_scale))
-hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
+hl.monitor({ output = "", mode = "preferred", position = "auto", scale = omarchy_monitor_scale })
 
 -- GU605C laptop panel.
 hl.monitor({ output = "eDP-1", mode = "2560x1600@240", position = "auto", scale = omarchy_monitor_scale })

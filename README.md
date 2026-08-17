@@ -151,7 +151,7 @@ After stowing or changing owned packages:
 - Start a fresh shell and confirm `printenv OPENCODE_DISABLE_EXTERNAL_SKILLS` and `printenv OPENCODE_ENABLE_EXA` each print `1`; non-interactive OpenCode launchers must supply both variables themselves.
 - Start a fresh shell and confirm `type y` shows the Yazi cd-on-exit function.
 - Confirm `type tdw` shows the tmux workspace function; from a project directory, `tdw cc` or `tdw oc` opens its session (`-c` continues that agent's last conversation; bare `tdw` re-attaches an existing session).
-- Confirm `type hdw` shows the herdr workspace function; from a project directory, `hdw cc` or `hdw oc` opens its workspace (bare `hdw` refocuses; the herdr server is started headless when down).
+- Confirm `type hdw` shows the herdr workspace function; from a project directory, `hdw cc` or `hdw oc` opens its workspace (bare `hdw` refocuses; the herdr server is started headless when down, and if that start fails `hdw` attaches plain herdr, rerun it inside).
 - Run `yazi` and confirm the layout ratio and sort order match the config.
 - Open a vault note in Neovim and confirm obsidian.nvim loads (`<leader>oo` opens the note switcher).
 

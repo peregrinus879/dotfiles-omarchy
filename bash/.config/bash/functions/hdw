@@ -4,8 +4,10 @@
 # Usage: hdw <cc|oc> [-c]   cc = Claude Code, oc = OpenCode; -c continues the
 # agent's last conversation in this project. Bare hdw refocuses an existing
 # project workspace. One agent per workspace by design (single writer).
-# Herdr socket commands need a running server; hdw starts one headless when the
-# server is down, so one invocation works from a cold boot.
+# Herdr socket commands need a running server and do not auto-start one; hdw
+# starts the server headless when it is down, so one invocation works from a
+# cold boot. If the headless start fails, hdw attaches plain herdr with a hint
+# to rerun hdw inside (documented two-step fallback).
 hdw() {
   local agent="" tab_label="" continue_flag="" arg
   for arg in "$@"; do
@@ -43,8 +45,9 @@ hdw() {
       sleep 0.25
     done
     if ! herdr status server 2>/dev/null | grep -q '^status: running'; then
-      echo "hdw: herdr server did not start; run 'herdr' once, then rerun hdw inside."
-      return 1
+      echo "hdw: headless server start failed; attaching plain herdr, rerun hdw inside."
+      herdr
+      return
     fi
   fi
 

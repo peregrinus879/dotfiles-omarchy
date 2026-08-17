@@ -159,10 +159,10 @@ After stowing or changing owned packages:
 A repo-root `Makefile` keeps the package list in one place and wraps the routine commands. Run targets from the repo root on the Omarchy machine:
 
 - `make stow` / `make unstow` / `make dry-run` / `make restow` - the stow command sets from Setup
-- `make verify` - the Verify symlink checks, bash syntax, and the nvim twin-spec sync check against `dotfiles-wsl`
+- `make verify` - the Verify symlink checks, bash and Lua syntax, TOML validity, and the twin-file sync check against `dotfiles-wsl`
 - `make clean` - guarded stow preparation (`scripts/prepare-stow.sh`); owned links and clobber artifacts only, aborts on anything unrecognized
 - `make recover` - the Recovery steps after `omarchy-reinstall-configs` (clean + restow)
-- `make lint` - ShellCheck over the bash package; `.shellcheckrc` disables the upstream-derived warnings so new issues stand out
+- `make lint` - ShellCheck over the bash package and `scripts/`; `.shellcheckrc` disables the upstream-derived warnings so new issues stand out
 
 `make stow`, `make restow`, and `make recover` finish with a forced Hyprland reload and config-error check when run inside a Hyprland session (rationale in the Makefile header); `make verify` runs the same check read-only.
 

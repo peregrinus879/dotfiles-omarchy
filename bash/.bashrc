@@ -36,3 +36,8 @@ y() {
 
 # Dev Workspace launcher (twin file with dotfiles-wsl)
 [[ -f ~/.config/bash/functions/dw ]] && source ~/.config/bash/functions/dw
+
+# Herdr Dev Workspace launcher (Omarchy-only; herdr is not on WSL)
+if command -v herdr > /dev/null && [[ -f ~/.config/bash/functions/hdw ]]; then
+  source ~/.config/bash/functions/hdw
+fi

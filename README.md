@@ -33,7 +33,7 @@ Local clones live side by side under `~/Projects/repos/dotfiles/`.
 Each top-level directory is a GNU Stow package that symlinks into `$HOME`:
 
 ```text
-bash/   Bash overrides (.bashrc with Omarchy defaults sourced + personal additions, dw workspace function)
+bash/   Bash overrides (.bashrc with Omarchy defaults sourced + personal additions, dw and hdw workspace functions)
 hypr/   Hyprland personal application keybindings (bindings.lua)
 nvim/   Additive Neovim plugin specs for the vault workflow (obsidian.lua, render-markdown.lua)
 yazi/   Yazi file manager config (yazi.toml, no theme)
@@ -151,6 +151,7 @@ After stowing or changing owned packages:
 - Start a fresh shell and confirm `printenv OPENCODE_DISABLE_EXTERNAL_SKILLS` and `printenv OPENCODE_ENABLE_EXA` each print `1`; non-interactive OpenCode launchers must supply both variables themselves.
 - Start a fresh shell and confirm `type y` shows the Yazi cd-on-exit function.
 - Confirm `type dw` shows the workspace function; from a project directory, `dw cc` or `dw oc` opens its session (`-c` continues that agent's last conversation; bare `dw` re-attaches an existing session).
+- Confirm `type hdw` shows the herdr workspace function; from a project directory, `hdw cc` or `hdw oc` opens its workspace (bare `hdw` refocuses; the herdr server is started headless when down).
 - Run `yazi` and confirm the layout ratio and sort order match the config.
 - Open a vault note in Neovim and confirm obsidian.nvim loads (`<leader>oo` opens the note switcher).
 

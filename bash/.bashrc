@@ -20,9 +20,6 @@ source "$OMARCHY_PATH/default/bash/rc"
 export OPENCODE_DISABLE_EXTERNAL_SKILLS=1
 export OPENCODE_ENABLE_EXA=1
 
-# Pin the editor; quattro defaults EDITOR to "omarchy-launch-editor --inline"
-export EDITOR=nvim
-
 # Launch Claude Code with ultracode; interactive aliases (cx, tdl targets) inherit via alias expansion
 alias claude='claude --effort ultracode'
 

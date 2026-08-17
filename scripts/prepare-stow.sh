@@ -45,6 +45,14 @@ resolves_into_repo() {
   [[ $resolved == "$repo"/* ]]
 }
 
+# A path whose parent resolves into the repo IS repo working-tree content
+# (reached through a symlinked parent), whatever the entry's own type.
+parent_resolves_into_repo() {
+  local resolved
+  resolved=$(readlink -f -- "$(dirname -- "$1")") || return 1
+  [[ $resolved == "$repo" || $resolved == "$repo"/* ]]
+}
+
 for d in "${fold_dirs[@]}"; do
   if [[ -L $d ]]; then
     resolves_into_repo "$d" || abort "$d is a symlink that does not resolve into this repo; refusing to remove it"
@@ -54,6 +62,9 @@ for d in "${fold_dirs[@]}"; do
 done
 
 for f in "${owned_files[@]}"; do
+  if [[ -e $f || -L $f ]] && parent_resolves_into_repo "$f"; then
+    abort "$f sits under a parent that resolves into this repo; refusing to remove repo content"
+  fi
   if [[ -L $f ]]; then
     resolves_into_repo "$f" || abort "$f is a symlink that does not resolve into this repo; refusing to remove it"
     rm -- "$f"

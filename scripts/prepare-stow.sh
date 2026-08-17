@@ -55,6 +55,11 @@ for f in "${owned_files[@]}"; do
     rm -- "$f"
     echo "removed: $f (owned link)"
   elif [[ -f $f ]]; then
+    # A regular file resolving into the repo can only be reached through a
+    # symlinked parent; deleting it would delete repo working-tree content.
+    if resolves_into_repo "$f"; then
+      abort "$f is a regular file that resolves into this repo through a symlinked parent; refusing to remove it"
+    fi
     rm -f -- "$f"
     echo "removed: $f (regular file at an owned path, Omarchy clobber artifact)"
   elif [[ -e $f ]]; then

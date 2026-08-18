@@ -1,24 +1,26 @@
-# dotfiles-omarchy
+# EyrArcHy
 
 Personal [Omarchy](https://github.com/basecamp/omarchy) dotfiles, managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
-`dotfiles-omarchy` carries standalone personal customizations for the Omarchy desktop. Omarchy manages its own defaults, themes, and desktop configs. This repo tracks only targeted personal deviations applied via GNU Stow.
+EyrArcHy carries standalone personal customizations for the Omarchy desktop. Omarchy manages its own defaults, themes, and desktop configs. This repo tracks only targeted personal deviations applied via GNU Stow.
+
+The display name shares its capital `H` between Arch and Hyprland, preserving Omarchy's naming lineage; the repository slug remains lowercase `eyrarchy`.
 
 ## Repo Family
 
 Derivation model for this repo family:
 
 ```text
-AI harness configs              → dotfiles-ai
-Omarchy + personal deviations   → dotfiles-omarchy
-Omarchy + WSL deviations        → dotfiles-wsl
+AI agent harness                → EyrAgents
+Omarchy + personal deviations   → EyrArcHy
+Omarchy + WSL deviations        → EyrWSL
 ```
 
-- [`dotfiles-ai`](https://github.com/peregrinus879/dotfiles-ai) - AI harness configs: Claude Code and OpenCode settings, shared guidance, and commit workflow
-- [`dotfiles-omarchy`](https://github.com/peregrinus879/dotfiles-omarchy) - Personal Omarchy customizations: Bash overrides, Hyprland overrides, Neovim plugins, and Yazi
-- [`dotfiles-wsl`](https://github.com/peregrinus879/dotfiles-wsl) - Self-contained WSL Arch dotfiles: terminal baseline plus Windows Terminal, clipboard integration, and OpenCode theme
+- [`eyragents`](https://github.com/peregrinus879/eyragents) - AI agent harness: Claude Code, Codex, and OpenCode settings, shared guidance, and commit workflow
+- [`eyrarchy`](https://github.com/peregrinus879/eyrarchy) - Personal Omarchy customizations: Bash overrides, Hyprland bindings, Neovim plugins, and Yazi
+- [`eyrwsl`](https://github.com/peregrinus879/eyrwsl) - Self-contained WSL Arch environment: terminal baseline plus Windows Terminal, clipboard integration, and OpenCode theme
 
-Local clones live side by side under `~/Projects/repos/dotfiles/`.
+Local clones live side by side under `~/Projects/eyrie/`.
 
 ## Stack
 
@@ -42,7 +44,7 @@ yazi/   Yazi file manager config (yazi.toml, no theme)
 Key ownership rules:
 
 - Omarchy manages all defaults, themes, and desktop configs
-- `bash/` owns `~/.bashrc`, sources Omarchy defaults, and adds personal overrides below, including the interactive OpenCode skill-isolation and search environment; `dotfiles-ai` owns the OpenCode configuration itself
+- `bash/` owns `~/.bashrc`, sources Omarchy defaults, and adds personal overrides below, including the interactive OpenCode skill-isolation and search environment; EyrAgents owns the OpenCode configuration itself
 - `yazi/` is purely additive since Yazi is not part of Omarchy
 - `nvim/` is purely additive plugin specs on top of the `omarchy-nvim` base; the vault is expected at `~/Projects/vault` (override with `OBSIDIAN_VAULT`)
 - `hypr/` owns `~/.config/hypr/bindings.lua`, `~/.config/hypr/monitors.lua`, `~/.config/hypr/input.lua`, and `~/.config/hypr/looknfeel.lua`: personal overrides only, loaded after the Omarchy defaults; all other Hyprland config is Omarchy-owned and untracked
@@ -65,13 +67,13 @@ sudo pacman -S yazi
 Recommended local layout for this repo family:
 
 ```text
-~/Projects/repos/dotfiles/dotfiles-omarchy
+~/Projects/eyrie/eyrarchy
 ```
 
 Stow can work from any clone location, but the related docs and cross-repo maintenance workflows assume this layout.
 
 ```bash
-git clone https://github.com/peregrinus879/dotfiles-omarchy.git ~/Projects/repos/dotfiles/dotfiles-omarchy
+git clone https://github.com/peregrinus879/eyrarchy.git ~/Projects/eyrie/eyrarchy
 ```
 
 ### 3. Prepare
@@ -86,7 +88,7 @@ Checklist before stowing:
 Remove existing files that would conflict with stow. The guarded preparation script removes only symlinks that resolve into this repo (tree-folded directory links first, so per-file removals never resolve through a fold into the repo) and regular files at owned paths (Omarchy clobber artifacts); anything unrecognized aborts the run untouched:
 
 ```bash
-cd ~/Projects/repos/dotfiles/dotfiles-omarchy
+cd ~/Projects/eyrie/eyrarchy
 make clean
 ```
 
@@ -95,7 +97,7 @@ make clean
 Create symlinks for all packages:
 
 ```bash
-cd ~/Projects/repos/dotfiles/dotfiles-omarchy
+cd ~/Projects/eyrie/eyrarchy
 stow -v -t ~ bash hypr nvim yazi
 ```
 
@@ -104,7 +106,7 @@ Start a new terminal session, or run `source ~/.bashrc`, for the shell config to
 ### Unstow
 
 ```bash
-cd ~/Projects/repos/dotfiles/dotfiles-omarchy
+cd ~/Projects/eyrie/eyrarchy
 stow -D -v -t ~ bash hypr nvim yazi
 ```
 
@@ -113,7 +115,7 @@ stow -D -v -t ~ bash hypr nvim yazi
 Preview what stow would do without making changes:
 
 ```bash
-cd ~/Projects/repos/dotfiles/dotfiles-omarchy
+cd ~/Projects/eyrie/eyrarchy
 stow -v -n -t ~ bash hypr nvim yazi
 ```
 
@@ -122,7 +124,7 @@ stow -v -n -t ~ bash hypr nvim yazi
 To update symlinks after the repo content changes (same clone path):
 
 ```bash
-cd ~/Projects/repos/dotfiles/dotfiles-omarchy
+cd ~/Projects/eyrie/eyrarchy
 stow -R -v -t ~ bash hypr nvim yazi
 ```
 
@@ -131,7 +133,7 @@ To migrate from a different clone path, unstow from the old location first:
 ```bash
 cd /old/clone/path
 stow -D -v -t ~ bash hypr nvim yazi
-cd ~/Projects/repos/dotfiles/dotfiles-omarchy
+cd ~/Projects/eyrie/eyrarchy
 stow -v -t ~ bash hypr nvim yazi
 ```
 
@@ -161,7 +163,7 @@ After stowing or changing owned packages:
 A repo-root `Makefile` keeps the package list in one place and wraps the routine commands. Run targets from the repo root on the Omarchy machine:
 
 - `make stow` / `make unstow` / `make dry-run` / `make restow` - the stow command sets from Setup
-- `make verify` - the Verify symlink checks, bash and Lua syntax, TOML validity, and the twin-file sync check against `dotfiles-wsl`
+- `make verify` - the Verify symlink checks, bash and Lua syntax, TOML validity, and the twin-file sync check against EyrWSL
 - `make clean` - guarded stow preparation (`scripts/prepare-stow.sh`); owned links and clobber artifacts only, aborts on anything unrecognized
 - `make recover` - the Recovery steps after `omarchy-reinstall-configs` (clean + restow)
 - `make lint` - ShellCheck over the bash package and `scripts/`; `.shellcheckrc` disables the upstream-derived warnings so new issues stand out

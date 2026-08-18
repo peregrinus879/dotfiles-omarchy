@@ -1,13 +1,13 @@
-# Maintenance automation for dotfiles-omarchy. Run from the repo root on the Omarchy machine.
+# Maintenance automation for EyrArcHy. Run from the repo root on the Omarchy machine.
 # The package list here is the single source of truth for the stow command sets.
 
 SHELL := /bin/bash
 PACKAGES := bash hypr nvim yazi
 
-# Twin files are byte-identical with dotfiles-wsl, synced manually; verify
+# Twin files are byte-identical with EyrWSL, synced manually; verify
 # fails on drift so the copies cannot silently diverge. Paths are repo-relative
 # and identical in both repos.
-SIBLING := $(HOME)/Projects/repos/dotfiles/dotfiles-wsl
+SIBLING := $(HOME)/Projects/eyrie/eyrwsl
 TWIN_SPECS := nvim/.config/nvim/lua/plugins/obsidian.lua \
   nvim/.config/nvim/lua/plugins/render-markdown.lua \
   bash/.config/bash/functions/tdw \
@@ -100,13 +100,13 @@ verify:
 	  else echo "FAIL: $$errs"; fail=1; fi; \
 	fi; \
 	if [[ ! -d "$(SIBLING)" ]]; then \
-	  echo "note: dotfiles-wsl clone not found, skipped twin checks"; \
+	  echo "note: EyrWSL clone not found, skipped twin checks"; \
 	else \
 	  for f in $(TWIN_SPECS); do \
 	    twin="$(SIBLING)/$$f"; \
-	    if [[ ! -e "$$twin" ]]; then echo "FAIL: twin missing in dotfiles-wsl: $$f"; fail=1; \
-	    elif cmp -s "$$f" "$$twin"; then echo "ok:   $$f matches the dotfiles-wsl twin"; \
-	    else echo "FAIL: $$f drifted from the dotfiles-wsl twin"; fail=1; fi; \
+	    if [[ ! -e "$$twin" ]]; then echo "FAIL: twin missing in EyrWSL: $$f"; fail=1; \
+	    elif cmp -s "$$f" "$$twin"; then echo "ok:   $$f matches the EyrWSL twin"; \
+	    else echo "FAIL: $$f drifted from the EyrWSL twin"; fail=1; fi; \
 	  done; \
 	fi; \
 	exit $$fail

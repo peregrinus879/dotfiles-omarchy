@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document records the intentional differences carried by `dotfiles-omarchy` relative to [Omarchy](https://github.com/basecamp/omarchy) defaults, and defines the boundary between personal desktop customizations and Omarchy-managed behavior.
+This document records the intentional differences carried by EyrArcHy relative to [Omarchy](https://github.com/basecamp/omarchy) defaults, and defines the boundary between personal desktop customizations and Omarchy-managed behavior.
 
 Omarchy is the upstream reference. This repo carries only targeted personal deviations applied via GNU Stow.
 
@@ -32,10 +32,10 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 ### Bash
 
 - `.bashrc` opens with the upstream quattro preamble (sources `/etc/omarchy.conf` when present, defaults `OMARCHY_PATH` to `/usr/share/omarchy`, and sources `$OMARCHY_PATH/default/bash/rc`), then adds personal overrides below. The preamble is upstream-authored and kept verbatim; Omarchy writes to `.bashrc` reach the repo file through the stow symlink.
-- Interactive Bash exports `OPENCODE_DISABLE_EXTERNAL_SKILLS=1` and `OPENCODE_ENABLE_EXA=1` so terminal-launched OpenCode selects its managed skills and exposes its configured web-search tool. `dotfiles-ai` owns OpenCode configuration; this repo owns the Omarchy host environment. Non-interactive launchers supply both variables explicitly.
-- `claude` is aliased to add `--effort ultracode`, so every interactive launch, including `cx` and `tdl`-launched AIs, inherits it via alias expansion; scripts and hooks stay plain. Ultracode is session-only upstream and cannot be set in `settings.json`. This intentionally overrides the `effortLevel` pin `dotfiles-ai` tracks for interactive Omarchy sessions; its pinned bridges (`spar-claude`) are unaffected since scripts do not expand aliases.
+- Interactive Bash exports `OPENCODE_DISABLE_EXTERNAL_SKILLS=1` and `OPENCODE_ENABLE_EXA=1` so terminal-launched OpenCode selects its managed skills and exposes its configured web-search tool. EyrAgents owns OpenCode configuration; this repo owns the Omarchy host environment. Non-interactive launchers supply both variables explicitly.
+- `claude` is aliased to add `--effort ultracode`, so every interactive launch, including `cx` and `tdl`-launched AIs, inherits it via alias expansion; scripts and hooks stay plain. Ultracode is session-only upstream and cannot be set in `settings.json`. This intentionally overrides the `effortLevel` pin EyrAgents tracks for interactive Omarchy sessions; its pinned bridges (`spar-claude`) are unaffected since scripts do not expand aliases.
 - `y()` is added for Yazi cd-on-exit support. Yazi is not part of Omarchy.
-- `tdw` is added: one tmux session per project (Git root, else current directory) with two windows: a full-width AI agent (`tdw cc` for Claude Code, `tdw oc` for OpenCode; the choice is mandatory at creation so a single agent owns the working tree) and `$EDITOR` above a 25% shell. `-c` continues that agent's last conversation in the project; bare `tdw` re-attaches an existing session. Additive alongside Omarchy's `tdl`/`tds` pane layouts; tracked as a byte-identical twin with `dotfiles-wsl`. The `t`/`h` prefix follows Omarchy's multiplexer lettering (`tdl`/`hdl`).
+- `tdw` is added: one tmux session per project (Git root, else current directory) with two windows: a full-width AI agent (`tdw cc` for Claude Code, `tdw oc` for OpenCode; the choice is mandatory at creation so a single agent owns the working tree) and `$EDITOR` above a 25% shell. `-c` continues that agent's last conversation in the project; bare `tdw` re-attaches an existing session. Additive alongside Omarchy's `tdl`/`tds` pane layouts; tracked as a byte-identical twin with EyrWSL. The `t`/`h` prefix follows Omarchy's multiplexer lettering (`tdl`/`hdl`).
 - `hdw` is added: the herdr counterpart of `tdw`, one herdr workspace per project with the same layout (full agent tab; `$EDITOR` over a 25% shell in an editor+terminal tab), the same `cc|oc` single-agent choice and `-c` flag, and a root-collision guard backed by a label-to-root record under `~/.local/state/hdw/roots` (workspace ids recycle across server restarts, so the record keys on the label). Bare `hdw` refocuses; when the herdr server is down, `hdw` starts it headless and attaches, so one invocation works from a cold boot, and if the headless start fails it attaches plain herdr with a hint to rerun `hdw` inside. Additive alongside Omarchy's `hdl`/`hds` pane layouts; sourced only when `herdr` is installed and not a twin (herdr is not on WSL).
 
 ### Hyprland
@@ -63,15 +63,15 @@ Omarchy manages its own defaults, themes, and desktop configs. This repo sources
 ### Yazi
 
 - Added entirely. Yazi is not part of Omarchy.
-- `yazi.toml` carries local layout and behavior choices: ratio `[2, 4, 4]`, hidden files shown, directories sorted first, `sort_by = "natural"`, and `linemode = "size"`. Tracked as a byte-identical twin with `dotfiles-wsl`.
+- `yazi.toml` carries local layout and behavior choices: ratio `[2, 4, 4]`, hidden files shown, directories sorted first, `sort_by = "natural"`, and `linemode = "size"`. Tracked as a byte-identical twin with EyrWSL.
 - No theme file is tracked; the Omarchy theme pipeline does not cover Yazi, which runs its built-in default theme over the terminal's themed palette.
 
 ## Out Of Scope
 
-The following do **not** belong in `dotfiles-omarchy`:
+The following do **not** belong in EyrArcHy:
 
 - Shared Linux baseline configs (out of scope)
-- WSL or Windows-specific behavior (belong in `dotfiles-wsl`)
-- AI harness configs (belong in `dotfiles-ai`)
+- WSL or Windows-specific behavior (belong in EyrWSL)
+- AI agent harness configuration (belongs in EyrAgents)
 - The vault itself, its scripts, or its sync (belong to the vault project)
 - Omarchy system bindings, window rules, or desktop defaults (belong in Omarchy)

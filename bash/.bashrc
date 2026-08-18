@@ -34,7 +34,7 @@ y() {
   rm -f -- "$tmp"
 }
 
-# Tmux Dev Workspace launcher (twin file with dotfiles-wsl)
+# Tmux Dev Workspace launcher (twin file with EyrWSL)
 [[ -f ~/.config/bash/functions/tdw ]] && source ~/.config/bash/functions/tdw
 
 # Herdr Dev Workspace launcher (Omarchy-only; herdr is not on WSL)

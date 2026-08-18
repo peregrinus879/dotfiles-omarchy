@@ -5,16 +5,16 @@ description: Sync personal Omarchy customizations against upstream references, i
 
 # Omasync
 
-Source configs from the installed Omarchy defaults, the reference repos, and official docs, compare against `dotfiles-omarchy`, and apply changes only where they belong in the personal customizations.
+Source configs from the installed Omarchy defaults, the reference repos, and official docs, compare against EyrArcHy, and apply changes only where they belong in the personal customizations.
 
 ## Sources
 
-Local reference clones live under `~/Projects/repos/references/`:
+Local reference clones live under `~/Projects/quarry/`:
 
 - `omarchy/` - main repo for bash, tmux, and general Omarchy defaults; tracks the upstream default branch, which upstream moves between releases (re-resolve with `git remote set-head origin -a`, then match the checkout), so pin release comparisons to the installed version's tag (`git show <installed-tag>:<path>`)
 - `obsidian.nvim/` - obsidian.nvim upstream for the vault plugin spec
 
-The installed defaults the machine actually runs live under `/usr/share/omarchy` (package-backed). The shipped `omarchy` agent skill (auto-discovered via `~/.claude/skills/omarchy`; package copy at `/usr/share/omarchy/default/agents/skills/omarchy`) is upstream-owned, refreshed with Omarchy updates, and authoritative for desktop-config editing; never fork it into this repo. Upstream URLs, official docs, and descriptions live in `DEVIATIONS.md` (Reference Sources). Durable findings and deferred items live in `docs/maintenance.md`; sibling ledgers live at `~/Projects/repos/dotfiles/dotfiles-ai/docs/maintenance.md` and the `dotfiles-wsl` equivalent.
+The installed defaults the machine actually runs live under `/usr/share/omarchy` (package-backed). The shipped `omarchy` agent skill (auto-discovered via `~/.claude/skills/omarchy`; package copy at `/usr/share/omarchy/default/agents/skills/omarchy`) is upstream-owned, refreshed with Omarchy updates, and authoritative for desktop-config editing; never fork it into this repo. Upstream URLs, official docs, and descriptions live in `DEVIATIONS.md` (Reference Sources). Durable findings and deferred items live in `docs/maintenance.md`; sibling coordination lives at `~/Projects/eyrie/eyragents/docs/maintenance.md` and `~/Projects/eyrie/eyrwsl/AGENTS.md`.
 
 ## When To Use
 
@@ -25,7 +25,7 @@ The installed defaults the machine actually runs live under `/usr/share/omarchy`
 
 ## Workflow
 
-1. Update the reference clones: for each repo under `~/Projects/repos/references/`, run `git remote set-head origin -a`, match the checkout to the resolved default branch, `git fetch --prune --tags && git pull --ff-only`, and confirm `HEAD` equals `origin/<default>`.
+1. Update the reference clones: for each repo under `~/Projects/quarry/`, run `git remote set-head origin -a`, match the checkout to the resolved default branch, `git fetch --prune --tags && git pull --ff-only`, and confirm `HEAD` equals `origin/<default>`.
 2. Compare `bash/.bashrc` overrides against the current Omarchy defaults in `omarchy/default/bash/`:
    - `cx` alias against `omarchy/default/bash/aliases`
    - `tdl` function against `omarchy/default/bash/fns/tmux`

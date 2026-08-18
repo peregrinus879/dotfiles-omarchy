@@ -1,5 +1,5 @@
 #!/bin/bash
-# Guarded stow preparation for dotfiles-omarchy (make clean / make recover).
+# Guarded stow preparation for EyrArcHy (make clean / make recover).
 #
 # Removes only what this repo owns: symlinks (including tree-folded directory
 # links) that resolve into this repo, and regular files sitting at owned file

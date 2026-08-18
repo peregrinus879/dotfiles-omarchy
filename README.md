@@ -6,6 +6,8 @@ EyrArcHy carries standalone personal customizations for the Omarchy desktop. Oma
 
 The display name shares its capital `H` between Arch and Hyprland, preserving Omarchy's naming lineage; the repository slug remains lowercase `eyrarchy`.
 
+Eyrie is the shared project habitat, reflected locally in `~/Projects/eyrie/`. `Eyr` is its shortened family prefix, used by EyrAgents, EyrArcHy, and EyrWSL.
+
 ## Repo Family
 
 Derivation model for this repo family:

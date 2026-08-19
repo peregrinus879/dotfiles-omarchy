@@ -20,7 +20,7 @@ Omarchy + WSL deviations        → EyrWSL
 
 - [`eyragents`](https://github.com/peregrinus879/eyragents) - AI agent harness: Claude Code, Codex, and OpenCode settings, shared guidance, and commit workflow
 - [`eyrarchy`](https://github.com/peregrinus879/eyrarchy) - Personal Omarchy customizations: Bash overrides, Hyprland bindings, Neovim plugins, and Yazi
-- [`eyrwsl`](https://github.com/peregrinus879/eyrwsl) - Self-contained WSL Arch environment: terminal baseline plus Windows Terminal, clipboard integration, and OpenCode theme
+- [`eyrwsl`](https://github.com/peregrinus879/eyrwsl) - Self-contained WSL Arch environment: terminal baseline plus Windows Terminal and clipboard integration
 
 Local clones live side by side under `~/Projects/eyrie/`.
 
@@ -165,7 +165,7 @@ After stowing or changing owned packages:
 A repo-root `Makefile` keeps the package list in one place and wraps the routine commands. Run targets from the repo root on the Omarchy machine:
 
 - `make stow` / `make unstow` / `make dry-run` / `make restow` - the stow command sets from Setup
-- `make verify` - the Verify symlink checks, bash and Lua syntax, TOML validity, and the twin-file sync check against EyrWSL
+- `make verify` - the Verify symlink checks, bash and Lua syntax, TOML validity, and, when the sibling clone is present, twin-file sync against EyrWSL; a missing sibling is reported as a skipped check
 - `make clean` - guarded stow preparation (`scripts/prepare-stow.sh`); owned links and clobber artifacts only, aborts on anything unrecognized
 - `make recover` - the Recovery steps after `omarchy-reinstall-configs` (clean + restow)
 - `make lint` - ShellCheck over the bash package and `scripts/`; `.shellcheckrc` disables the upstream-derived warnings so new issues stand out

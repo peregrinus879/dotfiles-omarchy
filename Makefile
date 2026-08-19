@@ -4,9 +4,9 @@
 SHELL := /bin/bash
 PACKAGES := bash hypr nvim yazi
 
-# Twin files are byte-identical with EyrWSL, synced manually; verify
-# fails on drift so the copies cannot silently diverge. Paths are repo-relative
-# and identical in both repos.
+# Twin files are byte-identical with EyrWSL and synced manually. When the
+# sibling clone is present, verify fails on drift; otherwise it reports a
+# skipped check. Paths are repo-relative and identical in both repos.
 SIBLING := $(HOME)/Projects/eyrie/eyrwsl
 TWIN_SPECS := nvim/.config/nvim/lua/plugins/obsidian.lua \
   nvim/.config/nvim/lua/plugins/render-markdown.lua \

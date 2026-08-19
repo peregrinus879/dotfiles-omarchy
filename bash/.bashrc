@@ -20,8 +20,8 @@ source "$OMARCHY_PATH/default/bash/rc"
 export OPENCODE_DISABLE_EXTERNAL_SKILLS=1
 export OPENCODE_ENABLE_EXA=1
 
-# Launch Claude Code with ultracode; interactive aliases (cx, tdl targets) inherit via alias expansion
-alias claude='claude --effort ultracode'
+# Launch Claude Code with maximum effort; interactive aliases (cx, tdl targets) inherit via alias expansion
+alias claude='claude --effort max'
 
 # Yazi cd-on-exit (Yazi is not part of Omarchy)
 y() {
@@ -37,7 +37,7 @@ y() {
 # Tmux Dev Workspace launcher (twin file with EyrWSL)
 [[ -f ~/.config/bash/functions/tdw ]] && source ~/.config/bash/functions/tdw
 
-# Herdr Dev Workspace launcher (Omarchy-only; herdr is not on WSL)
+# Herdr Dev Workspace launcher (twin file with EyrWSL)
 if command -v herdr > /dev/null && [[ -f ~/.config/bash/functions/hdw ]]; then
   source ~/.config/bash/functions/hdw
 fi
